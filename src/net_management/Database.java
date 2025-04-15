@@ -26,7 +26,7 @@ public class Database {
 	String strUnicode = "?useUnicode=true&characterEncoding=utf8";
 	String driver = "com.mysql.cj.jdbc.Driver";
 	String userName = "root";
-	String password = "";
+	String password = "admin";
 
 	public void CheckConnection() {
 		try {
@@ -72,28 +72,87 @@ public class Database {
 
 	// PC{
 	public void UpdatePCTime(String pc_id) {
-		// todo
+		String sq = "UPDATE PC SET USING_TIME = USING_TIME + 1 WHERE PC_ID =" + pc_id;
+		ExecuteSQL(sq);
 	}
 
 	public void ResetPCTime(String pc_id) {
-		// todo
+		String sq = "UPDATE PC SET using_time = 0 WHERE PC_ID =" + pc_id;
+		ExecuteSQL(sq);
 	}
 
 	public int GetPCTime(String pc_id) {
-		// todo
+		String sq = "SELECT USING_TIME FROM PC WHERE PC_ID=" + pc_id;
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(sq);
+			int a = -1;
+			while (rs.next()) {
+				a = rs.getInt(1);
+			}
+			// System.out.println(a);
+			s.close();
+			conn.close();
+			return a;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+
+		}
 		return 0;
 	}
 
 	public void SetPcState(String pc_id) {
-		// todo
+		String sq = "UPDATE PC SET pc_state = 1 WHERE PC_ID =" + pc_id;
+		ExecuteSQL(sq);
 	}
 
 	public void ResetPcState(String pc_id) {
-		// todo
+		String sq = "UPDATE PC SET pc_state = 0 WHERE PC_ID =" + pc_id;
+		ExecuteSQL(sq);
 	}
 
 	public boolean GetPCState(String pc_id) {
-		// todo
+		String sq = "SELECT pc_state FROM PC WHERE PC_ID=" + pc_id;
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(sq);
+			boolean a = false;
+			while (rs.next()) {
+				a = rs.getBoolean(1);
+			}
+			// System.out.println(a);
+			s.close();
+			conn.close();
+			return a;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 		return false;
 	}
 
@@ -130,54 +189,128 @@ public class Database {
 	}
 
 	public void UpdatePCUid(String pc_id, String uid) {
-		// todo
+
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			String sq = "UPDATE PC SET uid =? WHERE PC_ID =?";
+			PreparedStatement pre = conn.prepareStatement(sq);
+			pre.setString(1, uid);
+			pre.setString(2, pc_id);
+			pre.executeUpdate();
+			pre.close();
+			conn.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 	}
 
 	public void ResetPCUid(String pc_id) {
-		// todo
+		String sq = "UPDATE PC SET uid = NULL WHERE PC_ID =" + pc_id;
+		ExecuteSQL(sq);
 	}
 
 	public List<Integer> GetAllPCid() {
-		String sq ="SELECT pc_id FROM pc";
-        try {
-            Class.forName(driver).newInstance();
-            conn = DriverManager.getConnection(url+dbName+strUnicode,userName,password);
-            Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery(sq);
-            List<Integer> list = new ArrayList<Integer>();
-            while(rs.next()){
-                list.add(rs.getInt(1));
-            }
-            s.close();
-            rs.close();
-            conn.close();
-            return list;
-        }catch(SQLException se)
-        {
-            se.printStackTrace();
-        }catch(Exception e){
-            // Xu ly cac loi cho Class.forName
-            e.printStackTrace();
-        }finally{
-            // Khoi finally duoc su dung de dong cac resource
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }
-        }
-        return null;
+		String sq = "SELECT pc_id FROM pc";
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			Statement s = conn.createStatement();
+			ResultSet rs = s.executeQuery(sq);
+			List<Integer> list = new ArrayList<Integer>();
+			while (rs.next()) {
+				list.add(rs.getInt(1));
+			}
+			s.close();
+			rs.close();
+			conn.close();
+			return list;
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	public boolean AddPC(String pcid) {
-		// todo
-		return false;
+		if (GetPCTime(pcid) != -1) {
+			return false;
+		}
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			String sq = "INSERT INTO PC VALUES(?,null,0,0)";
+			PreparedStatement pre = conn.prepareStatement(sq);
+			pre.setString(1, pcid);
+			pre.executeUpdate();
+			pre.close();
+			conn.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 	public boolean DelPC(String pcid) {
-		// todo
-		return false;
+		if (GetPCTime(pcid) == -1) {
+			return false;
+		}
+		try {
+			Class.forName(driver).newInstance();
+			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
+			String sq = "DELETE FROM PC WHERE PC_ID =?";
+			PreparedStatement pre = conn.prepareStatement(sq);
+			pre.setString(1, pcid);
+			pre.executeUpdate();
+			pre.close();
+			conn.close();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Xu ly cac loi cho Class.forName
+			e.printStackTrace();
+		} finally {
+			// Khoi finally duoc su dung de dong cac resource
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 	public boolean CreateAcc(String uid, String u_pass, int time) {
@@ -219,7 +352,7 @@ public class Database {
 	}
 
 	public boolean AddTimeU(String uid, int time) {
-		//todo
+		// todo
 		return false;
 	}
 
@@ -256,49 +389,49 @@ public class Database {
 	}
 
 	public boolean SetStartDate(String uid, String date) {
-		//todo
+		// todo
 		return false;
 	}
 
 	public boolean SetEndDate(String uid, String date) {
-		//todo
+		// todo
 		return false;
 	}
 
 	public String GetStartDate(String uid) {
-		//todo
+		// todo
 		return "";
 	}
 
 	public String GetEndDate(String uid) {
-		//todo
+		// todo
 		return "";
 	}
 
 	public void AddIncome(float income, String date) {
-		//todo
+		// todo
 	}
 
 	public void UpdateIncome(float money, String date) {
-		//todo
+		// todo
 	}
 
 	public boolean CheckDateExist(String date) {
-		//todo
+		// todo
 		return false;
 	}
 
 	public void TinhTien(float money, String date) {
-		//todo
+		// todo
 	}
 
 	public List<String> GetAllDate() {
-		//todo
+		// todo
 		return null;
 	}
 
 	public double GetIncome(String date) {
-		//todo
+		// todo
 		return 0.0;
 	}
 }
