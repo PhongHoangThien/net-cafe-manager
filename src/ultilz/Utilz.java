@@ -1,4 +1,4 @@
-package net_management;
+package ultilz;
 
 public class Utilz {
     private int sec,min,hour;

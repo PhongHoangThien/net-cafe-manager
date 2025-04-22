@@ -9,8 +9,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.text.JTextComponent;
 import javax.xml.crypto.Data;
 
-import net_management.Utilz;
-import net_management.Database;
+import ultilz.Utilz;
+import net_management.DatabaseConnection;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 
-public class View {
+public class AdminFrame {
 	private JFrame jf;
 	private JTabbedPane jtp;
 	private JPanel pc_pn; // pc manager panel
@@ -107,9 +107,56 @@ public class View {
 		Border blueBorder = BorderFactory.createLineBorder(Color.blue);
 
 		// CREATE PC MANAGER TABLE
-		String pc_cols[] = { "Tên máy", "Người dùng", "Trạng thái", "Thời gian", "Còn lại" };
+		String pc_cols[] = { "Máy khách", "Người dùng", "Trạng thái", "Thời gian", "Còn lại" };
 		defaultTable_pc = new DefaultTableModel(pc_cols, 0);
 		pctb = new JTable(defaultTable_pc) {
+			@Override
+			public Component prepareRenderer(TableCellRenderer renderer, int rowIndex, int columnIndex) {
+				Component componenet = super.prepareRenderer(renderer, rowIndex, columnIndex);
+				Object value = getModel().getValueAt(rowIndex, columnIndex);
+				if (rowIndex % 2 == 1) {
+					if (columnIndex == 2) {
+						if (value.equals("ON")) {
+							componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+							componenet.setBackground(Color.lightGray);
+							componenet.setForeground(Color.GREEN);
+						}
+						if (value.equals("OFF")) {
+							// if date equal current date
+							componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+							componenet.setBackground(Color.lightGray);
+							componenet.setForeground(Color.red);
+						}
+					} else {
+						componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+						componenet.setBackground(Color.lightGray);
+						componenet.setForeground(Color.blue);
+					}
+				} else {
+					if (columnIndex == 2) {
+						if (value.equals("ON")) {
+							componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+							componenet.setBackground(Color.white);
+							componenet.setForeground(Color.GREEN);
+						}
+						if (value.equals("OFF")) {
+							// if date equal current date
+							componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+							componenet.setBackground(Color.white);
+							componenet.setForeground(Color.red);
+						}
+					} else {
+						componenet.setFont(new Font("TimesRoman", Font.BOLD, 13));
+						componenet.setBackground(Color.white);
+						componenet.setForeground(Color.blue);
+					}
+				}
+				return componenet;
+			}
+
+			public boolean isCellEditable(int rowIndex, int cellIndex) { // DISEDITABLE TABLE VALUES
+				return false;
+			}
 
 		};
 		pctb.setRowHeight(30);
@@ -130,7 +177,22 @@ public class View {
 		pc_pn.setSize(1200, 675);
 		pc_pn.setLocation(0, 0);
 		pctb.addMouseListener(new MouseAdapter() {
-			// todo
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = pctb.rowAtPoint(e.getPoint());
+				if (row >= 0 && row < pctb.getRowCount()) {
+					pctb.setRowSelectionInterval(row, row);
+				} else {
+					pctb.clearSelection();
+				}
+				if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) { // double click chuột trái để
+																						// start/stop pc được chọn.
+					startbutton(row, "khach");
+				}
+				if (e.getButton() == MouseEvent.BUTTON3) { // nhấn chuột phải để hiện popup login
+					loginbutton(row);
+				}
+			}
 		});
 		JLabel addPCbg = new JLabel(new ImageIcon("rsc/akempr.jpg"));
 		addPCbg.setSize(1200, 300);
@@ -503,7 +565,7 @@ public class View {
 	}
 
 	public void insertInto_pctb() { // insert data into pc manager table
-		Database db = new Database();
+		DatabaseConnection db = new DatabaseConnection();
 		List<Integer> list = db.GetAllPCid();
 		if (list == null) {
 			JOptionPane.showMessageDialog(jf, "Lỗi kết nối");
@@ -531,7 +593,7 @@ public class View {
 	}
 
 	public void insertInto_actb() { // insert data into account manager table
-		Database db = new Database();
+		DatabaseConnection db = new DatabaseConnection();
 		List<String> list = db.GetAllUid();
 		if (list == null) {
 			JOptionPane.showMessageDialog(jf, "Error when connect to the database!");
@@ -574,7 +636,7 @@ public class View {
 	}
 
 	public void loginbutton(int row) {
-		Database db = new Database();
+		DatabaseConnection db = new DatabaseConnection();
 		if (db.GetPCState(Integer.toString(row))) {
 			JOptionPane.showMessageDialog(jf, "Máy đang được sử dụng!");
 			return;
@@ -635,7 +697,7 @@ public class View {
 		String pcid = (String) pctb.getValueAt(row, 1);
 		String uid = uid_pt.getText();
 		char[] pw = pwd_pt.getPassword();
-		Database temp = new Database();
+		DatabaseConnection temp = new DatabaseConnection();
 		if (temp.CheckUPass(uid, String.valueOf(pw))) {
 			if (!temp.GetUState(uid)) {
 				startbutton(row, uid);
@@ -658,36 +720,170 @@ public class View {
 	}
 
 	public void startbutton(int row, String uid) {
-		// todo
+		DatabaseConnection db = new DatabaseConnection();
+		boolean state = db.GetPCState(Integer.toString(row));
+		if (state) {
+			StopButton(row);
+		} else {
+			db.SetPcState(Integer.toString(row));
+			db.UpdatePCUid(Integer.toString(row), uid);
+			db.SetUState(uid);
+			db.SetStartDate(uid, java.time.LocalDate.now().toString());
+			// pc
+			defaultTable_pc.setValueAt(uid, row, 1);
+			defaultTable_pc.setValueAt("ON", row, 2);
+
+			//
+			// ac
+			int index = getAcTBRow(uid);
+			defaulttable_ac.setValueAt(java.time.LocalDate.now().toString(), index, 3);
+			defaulttable_ac.setValueAt("ĐANG SỬ DỤNG", index, 4);
+			setUserState(uid, true);
+			//
+			OpenPC(Integer.toString(row));
+		}
 	}
 
 	public void OpenPC(String pc_id) {
-		// todo
+		DatabaseConnection db = new DatabaseConnection();
+		int index = Integer.parseInt(pc_id);
+		// frame.SetText(pc_id,index);
+		java.util.Timer timer = new java.util.Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				db.CheckConnection();
+				boolean state = db.GetPCState(pc_id);
+				String uid = db.GetPCUid(pc_id);
+				int time_remain = db.GetUserTime(uid);
+				if (time_remain == 0 || !state) {
+					if (state) {
+						StopButton(index);
+					}
+					timer.cancel();
+					// task.cancel();
+					return;
+				}
+				if (state && time_remain > 0) {
+					if (!"khach".equals(uid)) {
+						db.UpdateUTime(uid);// tru thoi gian con lai//
+					}
+					db.UpdatePCTime(pc_id);// tang thoi gian su dung
+					int time = db.GetPCTime(pc_id);
+					int remain = db.GetUserTime(uid);
+					Utilz t = new Utilz();
+					Utilz r = new Utilz();
+					// pc
+					t.SecToTime(time);
+					r.SecToTime(remain);
+					//
+					// ac
+					setUserTime(r.GetHour(), r.GetMin(), r.GetSec(), uid);
+
+					//
+					setUsingTime(t.GetHour(), t.GetMin(), t.GetSec(), index);
+					setRemainTime(r.GetHour(), r.GetMin(), r.GetSec(), index);
+				}
+
+			}
+		};
+		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 
 	public void AddPCB(String pc_id) {
-		// todo
+		DatabaseConnection db = new DatabaseConnection();
+		if (db.AddPC(pc_id)) {
+			Vector v = new Vector(4);
+			v.add(0, pc_id);
+			v.add(1, db.GetPCUid(pc_id));
+			v.add(2, db.GetPCState(pc_id));
+			int time = db.GetPCTime(pc_id);
+			Utilz t = new Utilz();
+			t.SecToTime(time);
+			v.add(3, t.GetHour() + ":" + t.GetMin() + ":" + t.GetSec());
+			v.add(4, "0:0:0");
+			if (db.GetPCState(pc_id)) {
+				v.set(2, "ON");
+			} else {
+				v.set(2, "OFF");
+			}
+			defaultTable_pc.addRow(v);
+			JOptionPane.showMessageDialog(jf, "Thêm máy mới thành công!");
+		} else {
+			JOptionPane.showMessageDialog(jf, "Máy đã tồn tại");
+		}
 	}
 
 	public void insertInto_stattb() {
 		// todo
 	}
 
+	public int getAcTBRow(String uid) {
+		for (int i = 0; i < defaulttable_ac.getRowCount(); i++) {
+			if (defaulttable_ac.getValueAt(i, 0).equals(uid)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	public void setUserTime(int h, int m, int sec, String uid) {
-		// todo
+		int row = getAcTBRow(uid);
+		defaulttable_ac.setValueAt(Integer.toString(h) + ":" 
+				+ Integer.toString(m) + ":" + Integer.toString(sec), row, 2);
 	}
 
 	public void setUserState(String uid, boolean state) {
-		// todo
-	}
+        int row = getAcTBRow(uid);
+        if (state) {
+            defaulttable_ac.setValueAt("ON",row,1);
+
+        }else{
+            defaulttable_ac.setValueAt("OFF",row,1);
+        }
+    }
 
 	public void DelButton() {
-		// todo
-	}
+        DatabaseConnection db = new DatabaseConnection();
+        String i = Integer.toString(defaultTable_pc.getRowCount() - 1);
+        if (!db.GetPCState(i)){
+                if(db.DelPC(i)){
+                    JOptionPane.showMessageDialog(jf,"Xoá thành công");
+                    defaultTable_pc.removeRow(defaultTable_pc.getRowCount() - 1);
+                }
+        }else{
+            JOptionPane.showMessageDialog(jf,"Xoá thất bại");
+        }
+    }
 
 	public void ChangeMoney() {
-		// todo
-	}
+	       jmoney = new JDialog(); jmoney.setTitle("Đổi giá tiền");
+	       jmoney.setResizable(false);
+	       jmoney.setSize(300, 150);
+	       jmoney.setLocationRelativeTo(null);
+	       jmoney.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	       jmoney.setLayout(null);
+	       JLabel jdbg = new JLabel(new ImageIcon("src\\doan\\backgr.jpg")); jdbg.setSize(300, 150); jdbg.setLocation(0,0);
+	       money_l = new JLabel("Giá tiền(Đ): "); money_l.setSize(100,30); money_l.setLocation(5,5);
+	       money_l.setForeground(Color.white);
+	       money_t = new JTextField(); money_t.setSize(160, 30); money_t.setLocation(105, 5);
+	       money_t.addKeyListener(new KeyAdapter() {
+	           @Override
+	           public void keyPressed(KeyEvent e) {
+	               if(e.getKeyCode() == KeyEvent.VK_ENTER){
+	                   if (!isNumber(money_t.getText())){
+	                        JOptionPane.showMessageDialog(jf,"Số tiền không hợp lệ");
+	                        return;
+	                    }
+	                   int temp = Integer.parseInt(money_t.getText());
+	                   ChangeMoneyReal(temp);
+	                   JOptionPane.showMessageDialog(jf, "Đổi thành công");
+	              }
+	           }
+	       });
+	       jdbg.add(money_l); jdbg.add(money_t);
+	       jmoney.add(jdbg);
+	       jmoney.setVisible(true);
+	    }
 
 	public void ChangeMoneyReal(int money) {
 		gia = (float) money;
