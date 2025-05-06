@@ -1,50 +1,21 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jul 08, 2020 at 07:40 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+SET time_zone = "+07:00";
 
--- drop database netdb
+drop database netdb; 
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE DATABASE IF NOT EXISTS netdb;
+USE netdb;
 
+CREATE TABLE accounts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(30) NOT NULL,
+  pwd varchar(30) NOT NULL,
+  time_remaining int(11) NOT NULL DEFAULT 0,
+  state tinyint(1) NOT NULL DEFAULT 0,
+  start_date date DEFAULT NULL,
+  end_date date DEFAULT NULL
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `netdb`
---
-CREATE DATABASE IF NOT EXISTS `netdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `netdb`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `account`
---
-
-CREATE TABLE `account` (
-  `uid` char(12) NOT NULL,
-  `u_pwd` varchar(30) NOT NULL,
-  `time_remaining` int(11) NOT NULL DEFAULT 0,
-  `u_state` tinyint(1) NOT NULL DEFAULT 0,
-  `start_date` date DEFAULT NULL,
-  `end_date` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `account`
---
-
-INSERT INTO `account` (`uid`, `u_pwd`, `time_remaining`, `u_state`, `start_date`, `end_date`) VALUES
+INSERT INTO accounts (name, pwd, time_remaining, state, start_date, end_date) VALUES
 ('1', '1', 26, 0, '2020-06-29', '2020-06-29'),
 ('2', '2', 71, 0, '2020-07-04', '2020-07-04'),
 ('3', '3', 75, 0, '2020-06-25', '2020-06-25'),
@@ -61,57 +32,38 @@ INSERT INTO `account` (`uid`, `u_pwd`, `time_remaining`, `u_state`, `start_date`
 ('thuannt', 'thuannt', 24, 0, '2020-07-04', '2020-07-04'),
 ('thuantruong', 'thuantruong', 100, 0, NULL, NULL);
 
--- --------------------------------------------------------
+CREATE TABLE machines (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  account_id int DEFAULT NULL,
+  state tinyint(1) NOT NULL DEFAULT 0,
+  using_time int(11) NOT NULL DEFAULT 0,
+  FOREIGN KEY (account_id) REFERENCES accounts(id)
+);
 
---
--- Table structure for table `pc`
---
+INSERT INTO machines (account_id, state, using_time) VALUES
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0),
+(NULL, 0, 0);
 
-CREATE TABLE `pc` (
-  `pc_id` int(12) NOT NULL,
-  `uid` char(12) DEFAULT NULL,
-  `pc_state` tinyint(1) NOT NULL DEFAULT 0,
-  `using_time` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pc`
---
-
-INSERT INTO `pc` (`pc_id`, `uid`, `pc_state`, `using_time`) VALUES
-(0, NULL, 0, 0),
-(1, NULL, 0, 0),
-(2, NULL, 0, 0),
-(3, NULL, 0, 0),
-(4, NULL, 0, 0),
-(5, NULL, 0, 0),
-(6, NULL, 0, 0),
-(7, NULL, 0, 0),
-(8, NULL, 0, 0),
-(9, NULL, 0, 0),
-(10, NULL, 0, 0),
-(11, NULL, 0, 0),
-(12, NULL, 0, 0),
-(13, NULL, 0, 0),
-(14, NULL, 0, 0),
-(15, NULL, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stastical`
---
-
-CREATE TABLE `stastical` (
-  `date` date NOT NULL,
-  `income` double NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `stastical`
---
-
-INSERT INTO `stastical` (`date`, `income`) VALUES
+CREATE TABLE statistical (
+  date date NOT NULL PRIMARY KEY,
+  income double NOT NULL DEFAULT 0
+);
+  
+INSERT INTO statistical (date, income) VALUES
 ('2020-06-07', 123214),
 ('2020-06-08', 123400),
 ('2020-06-09', 120000),
@@ -130,31 +82,76 @@ INSERT INTO `stastical` (`date`, `income`) VALUES
 ('2020-07-04', 100200),
 ('2020-07-08', 14100);
 
---
--- Indexes for dumped tables
---
+CREATE TABLE products (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(40) DEFAULT NULL,
+  price double DEFAULT NULL
+);
 
---
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`uid`) USING BTREE;
+INSERT INTO products (name, price) VALUES
+('Sting dâu', 12000),
+('Sting nho', 12000),
+('Mì tôm', 15000),
+('Mì trứng', 20000),
+('But chi', 5000),
+('So tay 500 trang', 40000),
+('So tay loai 1', 55000);
 
---
--- Indexes for table `pc`
---
-ALTER TABLE `pc`
-  ADD PRIMARY KEY (`pc_id`),
-  ADD KEY `PC_FK_1` (`uid`);
+CREATE TABLE customers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(40) DEFAULT NULL,
+  phone varchar(20) DEFAULT NULL,
+  dob date DEFAULT NULL,
+  date date DEFAULT NULL,
+  sale_amount double DEFAULT NULL
+);
 
---
--- Indexes for table `stastical`
---
-ALTER TABLE `stastical`
-  ADD PRIMARY KEY (`date`);
---
+INSERT INTO customers (name, phone, dob, date, sale_amount) VALUES
+('Nguyen Van A', '08823451', '1960-10-22', '2006-10-22', 13000000),
+('Tran Ngoc Han', '0908256478', '1974-04-03', '2006-07-30', 280000),
+('Tran Ngoc Linh', '0938776266', '1980-06-12', '2006-08-05', 3860000),
+('Tran Minh Long', '0917325476', '1965-03-09', '2006-10-02', 250000),
+('Le Nhat Minh', '08246108', '1950-03-10', '2006-10-26', 21000),
+('Le Hoai Thuong', '08631738', '1981-12-31', '2006-10-26', 915000),
+('Nguyen Van Tam', '0916783565', '1971-04-06', '2006-12-01', 12500),
+('Phan Thi Thanh', '0938435756', '1971-01-10', '2006-12-13', 365000),
+('Le Ha Vinh', '08654763', '1979-09-03', '2007-01-14', 70000),
+('Ha Duy Lap', '08768904', '1983-05-02', '2007-01-16', 67500);
+
+CREATE TABLE staffs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name varchar(40) DEFAULT NULL,
+  phone varchar(20) DEFAULT NULL,
+  start_date date DEFAULT NULL
+);
+
+INSERT INTO staffs (name, phone, start_date) VALUES
+('Nguyen Nhu Nhut', '0927345678', '2006-04-13'),
+('Le Thi Phi Yen', '0987567390', '2006-04-21'),
+('Nguyen Van B', '0997047382', '2006-04-27'),
+('Ngo Thanh Tuan', '0913758498', '2006-06-24'),
+('Nguyen Thi Truc Thanh', '0918590387', '2006-07-20');
 
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+CREATE TABLE bill_details (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  product_id INT NOT NULL,
+  quantity int(11) DEFAULT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE bills (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  date date DEFAULT NULL,
+  customer_id INT DEFAULT NULL,
+  staff_id INT DEFAULT NULL,
+  amount double DEFAULT NULL,
+  FOREIGN KEY (customer_id) REFERENCES customers(id),
+  FOREIGN KEY (staff_id) REFERENCES staffs(id)
+);
+
+-- INSERT INTO bills (date, customer_id, staff_id, amount) VALUES 
+
+
+
+
