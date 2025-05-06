@@ -101,22 +101,20 @@ CREATE TABLE customers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name varchar(40) DEFAULT NULL,
   phone varchar(20) DEFAULT NULL,
-  dob date DEFAULT NULL,
-  date date DEFAULT NULL,
   sale_amount double DEFAULT NULL
 );
 
-INSERT INTO customers (name, phone, dob, date, sale_amount) VALUES
-('Nguyen Van A', '08823451', '1960-10-22', '2006-10-22', 13000000),
-('Tran Ngoc Han', '0908256478', '1974-04-03', '2006-07-30', 280000),
-('Tran Ngoc Linh', '0938776266', '1980-06-12', '2006-08-05', 3860000),
-('Tran Minh Long', '0917325476', '1965-03-09', '2006-10-02', 250000),
-('Le Nhat Minh', '08246108', '1950-03-10', '2006-10-26', 21000),
-('Le Hoai Thuong', '08631738', '1981-12-31', '2006-10-26', 915000),
-('Nguyen Van Tam', '0916783565', '1971-04-06', '2006-12-01', 12500),
-('Phan Thi Thanh', '0938435756', '1971-01-10', '2006-12-13', 365000),
-('Le Ha Vinh', '08654763', '1979-09-03', '2007-01-14', 70000),
-('Ha Duy Lap', '08768904', '1983-05-02', '2007-01-16', 67500);
+INSERT INTO customers (name, phone, sale_amount) VALUES
+('Nguyen Van A', '08823451', 13000000),
+('Tran Ngoc Han', '0908256478', 280000),
+('Tran Ngoc Linh', '0938776266', 3860000),
+('Tran Minh Long', '0917325476', 250000),
+('Le Nhat Minh', '08246108', 21000),
+('Le Hoai Thuong', '08631738', 915000),
+('Nguyen Van Tam', '0916783565', 12500),
+('Phan Thi Thanh', '0938435756', 365000),
+('Le Ha Vinh', '08654763', 70000),
+('Ha Duy Lap', '08768904', 67500);
 
 CREATE TABLE staffs (
   id INT AUTO_INCREMENT PRIMARY KEY,

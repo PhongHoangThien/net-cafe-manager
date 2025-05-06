@@ -1,14 +1,13 @@
 package models;
 
-public class Computer {
+public class Machines {
 	private int id;
 	private int state;
 	private int usingTime;
 
-	public Computer() {
-	}
+	public Machines() {}
 
-	public Computer(int id, int state, int usingTime) {
+	public Machines(int id, int state, int usingTime) {
 		super();
 		this.id = id;
 		this.state = state;
