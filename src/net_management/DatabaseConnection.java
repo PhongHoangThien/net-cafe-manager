@@ -72,17 +72,17 @@ public class DatabaseConnection {
 
 	// PC{
 	public void UpdatePCTime(String pc_id) {
-		String sq = "UPDATE PC SET USING_TIME = USING_TIME + 1 WHERE PC_ID =" + pc_id;
+		String sq = "UPDATE machines SET USING_TIME = USING_TIME + 1 WHERE id =" + pc_id;
 		ExecuteSQL(sq);
 	}
 
 	public void ResetPCTime(String pc_id) {
-		String sq = "UPDATE PC SET using_time = 0 WHERE PC_ID =" + pc_id;
+		String sq = "UPDATE machines SET using_time = 0 WHERE id =" + pc_id;
 		ExecuteSQL(sq);
 	}
 
 	public int GetPCTime(String pc_id) {
-		String sq = "SELECT USING_TIME FROM PC WHERE PC_ID=" + pc_id;
+		String sq = "SELECT using_time FROM machines WHERE id =" + pc_id;
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
@@ -115,17 +115,17 @@ public class DatabaseConnection {
 	}
 
 	public void SetPcState(String pc_id) {
-		String sq = "UPDATE PC SET pc_state = 1 WHERE PC_ID =" + pc_id;
+		String sq = "UPDATE machines SET state = 1 WHERE ID =" + pc_id;
 		ExecuteSQL(sq);
 	}
 
 	public void ResetPcState(String pc_id) {
-		String sq = "UPDATE PC SET pc_state = 0 WHERE PC_ID =" + pc_id;
+		String sq = "UPDATE machines SET state = 0 WHERE id =" + pc_id;
 		ExecuteSQL(sq);
 	}
 
 	public boolean GetPCState(String pc_id) {
-		String sq = "SELECT pc_state FROM PC WHERE PC_ID=" + pc_id;
+		String sq = "SELECT state FROM machines WHERE id =" + pc_id;
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
@@ -157,7 +157,7 @@ public class DatabaseConnection {
 	}
 
 	public String GetPCUid(String pc_id) {
-		String sq = "SELECT uid FROM PC WHERE PC_ID=" + pc_id;
+		String sq = "SELECT account_id FROM machines WHERE id =" + pc_id;
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
@@ -193,7 +193,7 @@ public class DatabaseConnection {
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
-			String sq = "UPDATE PC SET uid =? WHERE PC_ID =?";
+			String sq = "UPDATE machines SET account_id = ? WHERE ID =?";
 			PreparedStatement pre = conn.prepareStatement(sq);
 			pre.setString(1, uid);
 			pre.setString(2, pc_id);
@@ -217,12 +217,12 @@ public class DatabaseConnection {
 	}
 
 	public void ResetPCUid(String pc_id) {
-		String sq = "UPDATE PC SET uid = NULL WHERE PC_ID =" + pc_id;
+		String sq = "UPDATE machines SET account_id = NULL WHERE ID =" + pc_id;
 		ExecuteSQL(sq);
 	}
 
 	public List<Integer> GetAllPCid() {
-		String sq = "SELECT pc_id FROM pc";
+		String sq = "SELECT id FROM machines";
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
@@ -260,7 +260,7 @@ public class DatabaseConnection {
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
-			String sq = "INSERT INTO PC VALUES(?,null,0,0)";
+			String sq = "INSERT INTO machines VALUES(?,null,0,0)";
 			PreparedStatement pre = conn.prepareStatement(sq);
 			pre.setString(1, pcid);
 			pre.executeUpdate();
@@ -290,7 +290,7 @@ public class DatabaseConnection {
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
-			String sq = "DELETE FROM PC WHERE PC_ID =?";
+			String sq = "DELETE FROM machines WHERE ID =?";
 			PreparedStatement pre = conn.prepareStatement(sq);
 			pre.setString(1, pcid);
 			pre.executeUpdate();
@@ -357,7 +357,7 @@ public class DatabaseConnection {
 	}
 
 	public List<String> GetAllUid() {
-		String sq = "SELECT uid FROM account";
+		String sq = "SELECT id FROM accounts";
 		try {
 			Class.forName(driver).newInstance();
 			conn = DriverManager.getConnection(url + dbName + strUnicode, userName, password);
