@@ -23,8 +23,80 @@ public class ProductPanel extends JPanel {
     }
 
     public void initComponent() {
+        setLayout(new BorderLayout());
+
+        JLabel imageLabel = new JLabel(Helper.getIcon(product.getImage(),300,200));
+        add(imageLabel,BorderLayout.CENTER);
+
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(3,1));
+
+        JLabel namePanel = new JLabel(product.getName());
+        infoPanel.add(namePanel);
+
+        JLabel priceLabel = new JLabel(product.getPrice()+"đ");
+        infoPanel.add(priceLabel);
+
+        JTextField quantityField = new JTextField();
+        infoPanel.add(quantityField);
+
+        JButton addButton = new JButton("Add to Cart");
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(quantityField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null,"Vui Lòng Nhập Số Lượng Bạn Muốn Mua","Thông Báo",JOptionPane.ERROR_MESSAGE);
+                } else {
+                    int quantity = Integer.parseInt(quantityField.getText());
+                    new Cart().addItem(product, quantity);
+                }
+            }
+        });
+
+        infoPanel.add(addButton);
+        add(infoPanel,BorderLayout.SOUTH);
     }
 
+    public void showAllProducts() {
+        removeAll();
+
+        try {
+            List<Product> products = productBUS.findAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        revalidate();
+        repaint();
+    }
+
+    public void showProductsByCategory(String productType) {
+        removeAll();
+
+        if (productType.equals("FOOD")){
+            try {
+                List<Product> products = productBUS.filterByTypeProduct(Product.ProductType.FOOD);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (productType.equals("DRINK")) {
+            try {
+                List<Product> products = productBUS.filterByTypeProduct(Product.ProductType.DRINK);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        if (productType.equals("CARD")){
+            try {
+                List<Product> products = productBUS.filterByTypeProduct(Product.ProductType.CARD);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        revalidate();
+        repaint();
+    }
 
     public static void main(String[] args) {
         Helper.initUI();
