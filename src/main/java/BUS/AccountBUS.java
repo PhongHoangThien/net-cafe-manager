@@ -25,7 +25,7 @@ public class AccountBUS {
         if (existedAccount != null) {
             throw new RuntimeException("Username existed");
         }
-     return   this.accountDAO.create(account);
+        return   this.accountDAO.create(account);
     }
 
     public void update(Account account) throws SQLException {
@@ -43,12 +43,12 @@ public class AccountBUS {
 
 
     public void withdraw(int integer, double amount) throws SQLException {
-         var account = this.findById(integer);
-            account.setBalance(account.getBalance() - amount);
-            if (account.getBalance() < 0) {
-                throw new RuntimeException("Not enough money");
-            }
-            this.update(account);
+        var account = this.findById(integer);
+        account.setBalance(account.getBalance() - amount);
+        if (account.getBalance() < 0) {
+            throw new RuntimeException("Not enough money");
+        }
+        this.update(account);
     }
 
     public List<Account> getAllAccounts() throws  SQLException {
@@ -85,11 +85,11 @@ public class AccountBUS {
             e.printStackTrace();
             return null;
         }
-     
+
         return null;
     }
     public Account findByUsername(String username) throws SQLException {
-      return this.accountDAO.findByUsername(username);
+        return this.accountDAO.findByUsername(username);
 
     }
     public void changePassword(int id, String newPassword)  {
