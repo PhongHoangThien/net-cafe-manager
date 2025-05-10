@@ -1,9 +1,8 @@
-###### DO AN QUAN LY PHONG NET
+###### DO AN QUAN LY QUAN NET
 # Giới thiệu
 Phần mềm quản lý phòng internet (Bao gồm client & server) nhóm 5
 ## Công nghệ
- Java, JavaSwing, Socket, JDBC, MS SQL Server
-### [Database Schema](https://dbdiagram.io/d/63e72c8c296d97641d801fda)
+ Java, JavaSwing, Socket, JDBC, MySql
 
 ## Cài đặt
 
