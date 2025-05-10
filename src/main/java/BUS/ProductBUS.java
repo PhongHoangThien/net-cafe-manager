@@ -31,7 +31,7 @@ public class ProductBUS {
     }
     public Product findProductById(int id){
         try {
-         return   productDAO.findById(id);
+            return   productDAO.findById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

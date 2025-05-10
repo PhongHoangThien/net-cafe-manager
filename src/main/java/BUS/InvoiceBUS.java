@@ -18,7 +18,7 @@ public class InvoiceBUS {
     @Setter
     private IInvoiceDAO invoiceDAO;
     @Setter
-   private IInvoiceDetailDAO invoiceDetailDAO;
+    private IInvoiceDetailDAO invoiceDetailDAO;
     @Setter
     private ProductBUS productBUS;
 
