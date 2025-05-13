@@ -1,3 +1,6 @@
+/*
+ * Created by JFormDesigner on Wed Mar 22 21:45:12 ICT 2023
+ */
 
 package GUI.Server.Account;
 
@@ -13,6 +16,9 @@ import java.awt.*;
 import java.util.Arrays;
 import javax.swing.*;
 
+/**
+ * @author HuuHoang
+ */
 public class AccountDetailGUI extends JDialog {
 
     @Getter
@@ -122,6 +128,7 @@ public class AccountDetailGUI extends JDialog {
 
 
     private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         panel1 = new JPanel();
         label1 = new JLabel();
         panel7 = new JPanel();
@@ -277,8 +284,10 @@ public class AccountDetailGUI extends JDialog {
         contentPane.add(panel6);
         pack();
         setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel panel1;
     private JLabel label1;
     private JPanel panel7;
@@ -300,4 +309,5 @@ public class AccountDetailGUI extends JDialog {
     private JPanel panel6;
     private JButton cancel;
     private JButton ok;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

@@ -214,7 +214,7 @@ public class ManagerEmployee extends JPanel {
         menuItem.setFont(new Font("nunito", Font.BOLD, 16));
         menuItem.addActionListener(e->{
             list = employeeService.findAllEmployee();
-            showTable();
+           showTable();
         });
         popupMenu.add(menuItem);
 
@@ -229,7 +229,7 @@ public class ManagerEmployee extends JPanel {
         setPaddingJButton(0, 0, 0, 0, btnSearch);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
@@ -243,7 +243,7 @@ public class ManagerEmployee extends JPanel {
         setPaddingJButton(0, 0, 0, 0, btnAdd);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
@@ -258,7 +258,7 @@ public class ManagerEmployee extends JPanel {
         setPaddingJButton(0, 0, 0, 0, btnEdit);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
@@ -272,7 +272,7 @@ public class ManagerEmployee extends JPanel {
         setPaddingJButton(0, 0, 0, 0, btnDelete);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
@@ -320,7 +320,7 @@ public class ManagerEmployee extends JPanel {
         listEmployee.setBackground(new Color(153, 153, 153));
         listEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(MouseEvent evt) {
                 super.mouseClicked(evt);
                 onSelectedRowChange();
             }
@@ -369,7 +369,7 @@ public class ManagerEmployee extends JPanel {
         }
         super.setVisible(aFlag);
         if(!aFlag) {
-            return;
+          return;
         }
         var model = new DefaultComboBoxModel<TaiKhoanComboBoxItem>();
 
@@ -404,7 +404,7 @@ public class ManagerEmployee extends JPanel {
         if(searchTxt == null) {
             return;
         }
-        var fileredList =this.list.stream().filter(e -> e.getName().toLowerCase().contains(searchTxt.toLowerCase()) || String.valueOf(e.getId()).contains(searchTxt) || e.getPhoneNumber().contains(searchTxt)).toList();
+       var fileredList =this.list.stream().filter(e -> e.getName().toLowerCase().contains(searchTxt.toLowerCase()) || String.valueOf(e.getId()).contains(searchTxt) || e.getPhoneNumber().contains(searchTxt)).toList();
         showTable(fileredList);
     }
 
@@ -467,7 +467,7 @@ public class ManagerEmployee extends JPanel {
     }
 
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnEditActionPerformed(ActionEvent evt) {
         if (!validateInput()) {
             return;
         }
@@ -521,7 +521,7 @@ public class ManagerEmployee extends JPanel {
         }
     }
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnDeleteActionPerformed(ActionEvent evt) {
         DefaultTableModel model = (DefaultTableModel) listEmployee.getModel();
         int indexRowSelected = listEmployee.getSelectedRow();
         int idEmployeeSelected = (int) listEmployee.getValueAt(indexRowSelected, 0);

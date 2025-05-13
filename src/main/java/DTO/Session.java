@@ -2,12 +2,14 @@ package DTO;
 
 
 
+import BUS.AccountBUS;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -19,6 +21,7 @@ import java.util.Date;
 public class Session implements java.io.Serializable {
     @Serial
     private static final long serialVersionUID = 432430624324L;
+    private AccountBUS accountBUS = new AccountBUS();
 
     public Session(Session session){
         this.id = session.id;
@@ -55,6 +58,14 @@ public class Session implements java.io.Serializable {
 
     private Integer computerID = null;
     private Computer usingComputer;
+
+    public Account getUsingByAccount() {
+        try {
+            return accountBUS.findById(usingBy);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

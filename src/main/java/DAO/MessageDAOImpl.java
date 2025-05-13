@@ -10,7 +10,13 @@ import java.util.List;
 public class MessageDAOImpl extends BaseDAO implements IMessageDAO{
     @Override
     public Message create(Message message) throws SQLException {
-        return null;
+        PreparedStatement preparedStatement = this.prepareStatement("INSERT INTO Message (sessionId, content, fromType, createdAt) VALUES (?, ?, ?, ?)");
+        preparedStatement.setInt(1, message.getSessionId());
+        preparedStatement.setString(2, message.getContent());
+        preparedStatement.setInt(3, message.getFromType().ordinal());
+        preparedStatement.setTimestamp(4, new java.sql.Timestamp(message.getCreatedAt().getTime()));
+        preparedStatement.executeUpdate();
+        return message;
     }
 
     @Override
@@ -20,7 +26,9 @@ public class MessageDAOImpl extends BaseDAO implements IMessageDAO{
 
     @Override
     public boolean delete(Integer integer) throws SQLException {
-        return false;
+        PreparedStatement preparedStatement = this.prepareStatement("DELETE FROM Message WHERE id = ?");
+        preparedStatement.setInt(1, integer);
+        return preparedStatement.executeUpdate() > 0;
 
     }
 
@@ -34,6 +42,8 @@ public class MessageDAOImpl extends BaseDAO implements IMessageDAO{
         return null;
     }
     public List<Message> findAllBySessionId(int sessionId) throws SQLException {
-        return null;
+        PreparedStatement preparedStatement = this.prepareStatement("SELECT * FROM Message WHERE sessionId = ?");
+        preparedStatement.setInt(1, sessionId);
+        return DBHelper.toList(preparedStatement.executeQuery(), Message.class);
     }
 }

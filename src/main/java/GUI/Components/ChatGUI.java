@@ -1,3 +1,7 @@
+/*
+ * Created by JFormDesigner on Fri Apr 07 13:10:50 ICT 2023
+ */
+
 package GUI.Components;
 
 import lombok.Getter;
@@ -10,6 +14,9 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ * @author Laffy
+ */
 public class ChatGUI extends JFrame {
 
     @Setter
@@ -78,6 +85,7 @@ public class ChatGUI extends JFrame {
     }
 
     private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         panel1 = new JPanel();
         button1 = new JButton();
         scrollPane1 = new JScrollPane();
@@ -132,8 +140,10 @@ public class ChatGUI extends JFrame {
         contentPane.add(panel2, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(getOwner());
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel panel1;
     private JButton button1;
     private JScrollPane scrollPane1;
@@ -141,6 +151,7 @@ public class ChatGUI extends JFrame {
     private JPanel panel2;
     private JScrollPane scrollPane2;
     private JTextArea chattextArea2;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
 
 }

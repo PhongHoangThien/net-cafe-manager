@@ -43,12 +43,17 @@ import java.awt.event.ActionListener;
  *
  * @author Laffy
  */
-public class ProductCard extends javax.swing.JPanel {
+public class ProductCard extends JPanel {
     @Getter
     @Setter
     private Product product;
 
     public static void main(String[] args) {
+        Helper.initUI();
+        var frame = new JFrame();
+        frame.add(new ProductCard("/images/Bánh_mì_thịt.jpg", "Bánh mì thịt", 10000));
+        frame.pack();
+        frame.setVisible(true);
 
     }
     private String imagePath;
@@ -98,6 +103,11 @@ public class ProductCard extends javax.swing.JPanel {
 
     @Override
     public void update(Graphics g) {
+        super.update(g);
+        this.jLabel1.setText(productName);
+        this.jLabel2.setText(Helper.formatMoney(price));
+        this.jTextFieldSoLuong.setText(String.valueOf(quantity));
+        this.jButton3.setEnabled(!isAddedToCart);
     }
 
     /**
@@ -109,56 +119,56 @@ public class ProductCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextFieldSoLuong = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jPanel2 = new JPanel();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jPanel1 = new JPanel();
+        jButton1 = new JButton();
+        jTextFieldSoLuong = new JTextField();
+        jButton2 = new JButton();
+        jButton3 = new JButton();
         jXImagePanel1 = new org.jdesktop.swingx.JXImagePanel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(200, 350));
-        setLayout(new java.awt.BorderLayout());
+        setBackground(new Color(255, 255, 255));
+        setPreferredSize(new Dimension(200, 350));
+        setLayout(new BorderLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setMinimumSize(new java.awt.Dimension(200, 47));
+        jPanel2.setBackground(new Color(255, 255, 255));
+        jPanel2.setMinimumSize(new Dimension(200, 47));
 
-        jLabel1.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setFont(new Font("Nunito SemiBold", 0, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Bánh mì thịt");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setPreferredSize(new java.awt.Dimension(199, 23));
+        jLabel1.setHorizontalTextPosition(SwingConstants.CENTER);
+        jLabel1.setPreferredSize(new Dimension(199, 23));
         jPanel2.add(jLabel1);
 
-        jLabel2.setFont(new java.awt.Font("Nunito SemiBold", 0, 16)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setFont(new Font("Nunito SemiBold", 0, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel2.setText("30.000đ");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel2.setPreferredSize(new java.awt.Dimension(199, 23));
+        jLabel2.setHorizontalTextPosition(SwingConstants.CENTER);
+        jLabel2.setPreferredSize(new Dimension(199, 23));
         jPanel2.add(jLabel2);
 
-        jButton1.setFont(new java.awt.Font("Nunito ExtraBold", 0, 14)); // NOI18N
+        jButton1.setFont(new Font("Nunito ExtraBold", 0, 14)); // NOI18N
         jButton1.setText("-");
-        jButton1.setPreferredSize(new java.awt.Dimension(30, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.setPreferredSize(new Dimension(30, 30));
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
 
-        jTextFieldSoLuong.setFont(new java.awt.Font("Nunito Medium", 0, 14)); // NOI18N
+        jTextFieldSoLuong.setFont(new Font("Nunito Medium", 0, 14)); // NOI18N
         jTextFieldSoLuong.setText("0");
         jPanel1.add(jTextFieldSoLuong);
 
-        jButton2.setFont(new java.awt.Font("Nunito ExtraBold", 0, 14)); // NOI18N
+        jButton2.setFont(new Font("Nunito ExtraBold", 0, 14)); // NOI18N
         jButton2.setText("+");
-        jButton2.setPreferredSize(new java.awt.Dimension(30, 30));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.setPreferredSize(new Dimension(30, 30));
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -166,42 +176,42 @@ public class ProductCard extends javax.swing.JPanel {
 
         jPanel2.add(jPanel1);
 
-        jButton3.setBackground(new java.awt.Color(51, 153, 255));
-        jButton3.setFont(new java.awt.Font("Nunito Black", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setBackground(new Color(51, 153, 255));
+        jButton3.setFont(new Font("Nunito Black", 0, 14)); // NOI18N
+        jButton3.setForeground(new Color(255, 255, 255));
         jButton3.setText("Thêm vào giỏ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton3);
 
-        add(jPanel2, java.awt.BorderLayout.CENTER);
+        add(jPanel2, BorderLayout.CENTER);
 
         jXImagePanel1.setImage(Helper.getImage("images\\Bánh_mì_thịt.jpg",200,200));
-        jXImagePanel1.setPreferredSize(new java.awt.Dimension(200, 200));
+        jXImagePanel1.setPreferredSize(new Dimension(200, 200));
 
-        javax.swing.GroupLayout jXImagePanel1Layout = new javax.swing.GroupLayout(jXImagePanel1);
+        GroupLayout jXImagePanel1Layout = new GroupLayout(jXImagePanel1);
         jXImagePanel1.setLayout(jXImagePanel1Layout);
         jXImagePanel1Layout.setHorizontalGroup(
-            jXImagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jXImagePanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
         jXImagePanel1Layout.setVerticalGroup(
-            jXImagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jXImagePanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
 
-        add(jXImagePanel1, java.awt.BorderLayout.NORTH);
+        add(jXImagePanel1, BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        var newQuantity =Integer.parseInt(this.jTextFieldSoLuong.getText())+1;
         this.setQuantity(newQuantity);
-    }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         var newQuantity =Integer.parseInt(this.jTextFieldSoLuong.getText())-1;
         if(newQuantity <0){
             newQuantity =0;
@@ -209,19 +219,28 @@ public class ProductCard extends javax.swing.JPanel {
                 
         this.setQuantity(newQuantity);
 
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
+    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(quantity<=0){
+            JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
+            return;
+        }
+        this.setAddedToCart(true);
+        JOptionPane.showMessageDialog(this, "Đã thêm vào giỏ hàng");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextFieldSoLuong;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton jButton1;
+    private JButton jButton2;
+    private JButton jButton3;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JTextField jTextFieldSoLuong;
     private org.jdesktop.swingx.JXImagePanel jXImagePanel1;
+    // End of variables declaration//GEN-END:variables
 }
