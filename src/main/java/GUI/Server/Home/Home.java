@@ -1,3 +1,7 @@
+/*
+ * Created by JFormDesigner on Tue Mar 28 22:12:58 ICT 2023
+ */
+
 package GUI.Server.Home;
 
 import javax.swing.border.*;
@@ -22,11 +26,14 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.*;
 
+/**
+ * @author Laffy
+ */
 public class Home extends JPanel {
     @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
-        fetchComputers();
+       fetchComputers();
     }
 
     private List<JButton> computerButtons;
@@ -173,7 +180,7 @@ public class Home extends JPanel {
                                 .session(session)
                                 .content(message.toString())
                                 .fromType(Message.FROM.CLIENT).
-                                createdAt(new Date()).build();
+                                        createdAt(new Date()).build();
 
                         chatGUI.getMessages().add(clientMessage);
                         chatGUI.reloadMessageHistory();
@@ -236,9 +243,9 @@ public class Home extends JPanel {
             button.setBackground(new Color(0x00ffffff, true));
             button.setHorizontalTextPosition(SwingConstants.CENTER);
             tatItem.addActionListener(e -> {
-                Server.getInstance().getClients().stream().filter(c -> c.getMachineId() == computer.getId()).findFirst().ifPresent(c -> {
-                    c.emit("forceLock", null);
-                });
+                    Server.getInstance().getClients().stream().filter(c -> c.getMachineId() == computer.getId()).findFirst().ifPresent(c -> {
+                        c.emit("forceLock", null);
+                    });
             });
             computerPanel.add(button);
         });
@@ -249,6 +256,7 @@ public class Home extends JPanel {
     }
 
     private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         panel1 = new JPanel();
         panel2 = new JPanel();
         computerPanel = new JPanel();
@@ -274,9 +282,12 @@ public class Home extends JPanel {
             panel2.add(computerPanel, BorderLayout.CENTER);
         }
         add(panel2, BorderLayout.CENTER);
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel panel1;
     private JPanel panel2;
     private JPanel computerPanel;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
