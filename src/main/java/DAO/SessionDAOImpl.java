@@ -13,7 +13,7 @@ public class SessionDAOImpl extends BaseDAO implements ISessionDAO {
     public Session create(Session session) throws SQLException {
         var preparedStatement = this.prepareStatement("INSERT INTO session (computerID, usingBy, startTime, totalTime, usedTime, usedCost, serviceCost, prepaidAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, session.getComputerID());
-        preparedStatement.setInt(2, 8);
+        preparedStatement.setObject(2, session.getUsingBy());
         preparedStatement.setTime(3, new java.sql.Time(session.getStartTime().getTime()));
         preparedStatement.setInt(4, session.getTotalTime());
         preparedStatement.setInt(5, session.getUsedTime());
@@ -33,7 +33,7 @@ public class SessionDAOImpl extends BaseDAO implements ISessionDAO {
     public Session update(Session session) throws SQLException {
        var preparedStatement = this.prepareStatement("UPDATE session SET computerID = ?, usingBy = ?, startTime = ?, totalTime = ?, usedTime = ?, usedCost = ?, serviceCost = ?, prepaidAmount = ? WHERE id = ?");
         preparedStatement.setInt(1, session.getComputerID());
-        preparedStatement.setObject(2, 8);
+        preparedStatement.setObject(2, session.getUsingBy());
         preparedStatement.setTimestamp(3, new java.sql.Timestamp(session.getStartTime().getTime()));
         preparedStatement.setInt(4, session.getTotalTime());
         preparedStatement.setInt(5, session.getUsedTime());
