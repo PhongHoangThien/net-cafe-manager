@@ -52,6 +52,43 @@ public class AccountGUI extends JPanel {
 
     // 6.5: Hệ thống kiểm tra dữ liệu
     private void initEvent() {
+        searchTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String keyword = searchTextField.getText();
+                if (keyword.trim().equals("")) filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
+                // [5.6-5.7] Lọc và cập nhật danh sách tài khoản khi nhập từ khóa
+                filteredAccounts = accounts.stream().filter(account -> account.getUsername().contains(keyword) || (account.getId() + "").contains(keyword)).filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
+                renderTableData();
+            }
+        });
+        button1.addActionListener(e -> {
+            MainUI.getInstance().setBlur(true);
+
+            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(GUI.Server.MainUI.getInstance());
+            accountDetailGUI.setVisible(true);
+            MainUI.getInstance().setBlur(false);
+            accountDetailGUI.setModal(true);
+
+            try {
+                if (accountDetailGUI.getStatus() == JOptionPane.OK_OPTION) {
+                    accountBUS.create(accountDetailGUI.getAccount());
+
+                    JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
+
+                    reloadTableData();
+                }
+            } catch (Exception ex) {
+                //Username existed
+                if (ex.getMessage().equals("Username existed")) {
+                    JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
+                } else {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+
+        });
 
 
     }
