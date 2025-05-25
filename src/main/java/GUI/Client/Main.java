@@ -14,13 +14,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    private static final int COMPUTER_ID = 4;
+    private static final int COMPUTER_ID = 1;
     public static final Socket socket;
 
     static {
         try {
             // địa chỉ ip
-            socket = new Socket("192.168.135.1", Constants.SOCKET_PORT);
+            socket = new Socket("localhost", Constants.SOCKET_PORT);
+            Session session = new Session();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -29,6 +30,36 @@ public class Main {
     public static Session session;
 
     public static void main(String[] args) {
+        socket.emit("identify", COMPUTER_ID);
+        socket.on("errorMessage", (c,data) -> {
+            JOptionPane.showMessageDialog(null, data, "Lỗi", JOptionPane.ERROR_MESSAGE);
+        });
+        socket.on("infoMessage", (c,data) -> {
+            JOptionPane.showMessageDialog(null, data, "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        });
+        socket.on("notification", (c,data) -> {
+            Helper.showSystemNoitification("Thông báo", (String) data, TrayIcon.MessageType.INFO);
+        });
+        socket.on("listProduct",(c,data)->{
+            List<Product> products = (List<Product>) data;
+            FoodOrder.products = products;
+        });
+        socket.on("updateSession", (c, data) -> {
+            Main.session = (Session) data;
+            // Hiển thị GUI sau khi đã có session
+            SwingUtilities.invokeLater(MainGUI::new);
+        });
+        Helper.initUI();
+        //shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                socket.emit("shutdown",null);
+                socket.disconnect();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
 
+        new LoginGUI();
     }
 }

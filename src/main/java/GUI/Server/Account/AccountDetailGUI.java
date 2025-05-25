@@ -88,6 +88,7 @@ public class AccountDetailGUI extends JDialog {
         roleComboBox.setModel(new DefaultComboBoxModel<>(lowerRole));
         textField1.setEditable(false);
         switch (mode) {
+            //6.4: Nhập thông tin tài khoản cần tạo
             case CREATE -> {
                 label1.setText("Tạo tài khoản");
                 cancel.setText("Hủy");

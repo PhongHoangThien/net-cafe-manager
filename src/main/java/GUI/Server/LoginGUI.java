@@ -162,6 +162,7 @@ public class LoginGUI extends JFrame {
         setVisible(true);
     }
 
+
     private void btnLoginActionPerformed(ActionEvent e) {        var username = txtUsername.getText();
         var password = txtPassword.getText();
         var user = accountBUS.login(username, password);

@@ -44,6 +44,9 @@ public class PersonalSetting extends javax.swing.JPanel {
             var totalMoney = computerUsage.stream().mapToDouble(usage -> usage.getTotalMoney()).sum();
             var totalHour =0.0;
             for (var usage : computerUsage) {
+                if (usage.getEndAt() == null){
+                    break;
+                }
                 var minuteDiff = (usage.getEndAt().getTime() - usage.getCreatedAt().getTime()) / 1000 / 60;
                 totalHour += minuteDiff*1.0 / 60;
             }
@@ -55,6 +58,9 @@ public class PersonalSetting extends javax.swing.JPanel {
             var currentYear = java.time.LocalDate.now().getYear();
             var currentMonthSalary = computerUsage.stream().filter(usage -> {
                 var createdAt = usage.getCreatedAt();
+                if (createdAt == null) {
+                    return false;
+                }
                 var month = createdAt.getMonth() + 1;
                 var year = createdAt.getYear() + 1900;
                 return month == currentMonth && year == currentYear;
@@ -62,10 +68,16 @@ public class PersonalSetting extends javax.swing.JPanel {
             var currentMonthSalaryString = String.format("%.2fđ", currentMonthSalary);
             var currentMonthTimeWork = computerUsage.stream().filter(usage -> {
                 var createdAt = usage.getCreatedAt();
+                if (createdAt == null) {
+                    return false;
+                }
                 var month = createdAt.getMonth() + 1;
                 var year = createdAt.getYear() + 1900;
                 return month == currentMonth && year == currentYear;
             }).mapToDouble(usage -> {
+                if (usage.getEndAt() == null) {
+                    return 0;
+                }
                 var minuteDiff = (usage.getEndAt().getTime() - usage.getCreatedAt().getTime()) / 1000 / 60;
                 return minuteDiff*1.0 / 60;
             }).sum();

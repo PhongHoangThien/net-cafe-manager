@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * Created by JFormDesigner on Fri Mar 10 17:10:28 ICT 2023
  */
@@ -7,6 +6,7 @@ package GUI.Client;
 
 import javax.swing.border.*;
 
+import BUS.SessionBUS;
 import GUI.Components.ChatGUI;
 import GUI.Server.Order.FoodOrder;
 import Utils.Fonts;
@@ -26,6 +26,7 @@ import javax.swing.*;
 public class MainGUI extends JFrame {
     public java.util.List<Message> messages = new ArrayList<>();
     private final ChatGUI chatGUI;
+    private SessionBUS sessionBUS = new SessionBUS();
 
     public MainGUI() {
         chatGUI = new ChatGUI(messages, Message.FROM.CLIENT);
@@ -62,6 +63,7 @@ public class MainGUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         FlatDropShadowBorder shadow = new FlatDropShadowBorder();
         panel2.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
+        Main.session = sessionBUS.createSession(0, 1);
         label7.setText(Main.session.getUsingByAccount() == null ? "KHÁCH VÃNG LAI" : Main.session.getUsingByAccount().getUsername());
         label7.putClientProperty("FlatLaf.styleClass", "h2");
         label8.setIcon(Helper.getIcon("/icons/supportbanner.png", 300, 180));
@@ -488,48 +490,3 @@ public class MainGUI extends JFrame {
         MainGUI mainGUI = new MainGUI();
     }
 }
-=======
-/*
- * Created by JFormDesigner on Fri Mar 10 17:10:28 ICT 2023
- */
-
-package GUI.Client;
-
-import javax.swing.border.*;
-
-import GUI.Components.ChatGUI;
-import GUI.Server.Order.FoodOrder;
-import Utils.Fonts;
-import Utils.Helper;
-import com.formdev.flatlaf.ui.FlatDropShadowBorder;
-import DTO.Message;
-import DTO.Session;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.*;
-
-/**
- * @author Laffy
- */
-public class MainGUI extends JFrame {
-    public java.util.List<Message> messages = new ArrayList<>();
-
-    public MainGUI() {
-
-    }
-
-    public void onCleanUp() {
-        Main.socket.removeAllListeners("timeOut");
-        Main.socket.removeAllListeners("updateSession");
-        Main.socket.removeAllListeners("forceLock");
-        Main.socket.removeAllListeners("message");
-    }
-
-    public static void main(String[] args) {
-        Helper.initUI();
-        MainGUI mainGUI = new MainGUI();
-    }
-}
->>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)

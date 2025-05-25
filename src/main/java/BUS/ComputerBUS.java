@@ -1,7 +1,9 @@
 package BUS;
 
+import DAO.ComputerDAOImpl;
 import DAO.Interface.IComputerDAO;
 import DAO.Interface.ISessionDAO;
+import DAO.SessionDAOImpl;
 import Io.Server;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,9 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 public class ComputerBUS {
     @Setter
-    private ISessionDAO sessionDAO;
+    private ISessionDAO sessionDAO = new SessionDAOImpl();
     @Setter
-    private IComputerDAO computerDAO;
+    private IComputerDAO computerDAO = new ComputerDAOImpl();
     public List<Computer> updateListComputerStatus(List<Computer> computers){
 //// Duyệt qua từng máy và kiểm tra xem có client đang kết nối hay không
         computers= computers.stream().peek(c->{
