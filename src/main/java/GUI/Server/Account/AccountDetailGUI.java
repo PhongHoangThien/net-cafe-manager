@@ -73,7 +73,7 @@ public class AccountDetailGUI extends JDialog {
     }
 
     public AccountDetailGUI(Window owner) {
-        this(owner, Account.builder().username("").password("").build(), Mode.CREATE);
+
     }
 
     public AccountDetailGUI(Window owner, Account account) {
