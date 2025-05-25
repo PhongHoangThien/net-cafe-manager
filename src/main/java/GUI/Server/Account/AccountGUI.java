@@ -236,13 +236,7 @@ public class AccountGUI extends JPanel {
     }
 
     private void reloadTableData() {
-        try {
-            accounts = accountBUS.getAllAccounts();
-            filteredAccounts = new ArrayList<>(accounts);
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
-        }
-        renderTableData();
+
     }
 
     private void renderTableData() {
