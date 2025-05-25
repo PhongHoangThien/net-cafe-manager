@@ -31,7 +31,7 @@ public class Session implements java.io.Serializable {
         this.serviceCost = session.serviceCost;
         this.startTime = session.startTime;
         this.prepaidAmount = session.prepaidAmount;
-        this.usingBy = session.usingBy;
+        this.usingBy = 1;
         this.usingByAccount = session.usingByAccount;
         this.computerID = session.computerID;
         this.usingComputer = session.usingComputer;
@@ -53,7 +53,7 @@ public class Session implements java.io.Serializable {
     private Date startTime = new Date();
 
     private double prepaidAmount = 0; // VND
-    private Integer usingBy = null;
+    private Integer usingBy = 1;
     private Account usingByAccount;
 
     private Integer computerID = null;
@@ -61,6 +61,7 @@ public class Session implements java.io.Serializable {
 
     public Account getUsingByAccount() {
         try {
+            System.out.print(usingBy);
             return accountBUS.findById(usingBy);
         } catch (SQLException e) {
             throw new RuntimeException(e);

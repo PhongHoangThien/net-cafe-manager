@@ -1,6 +1,7 @@
 package BUS;
 
 import DAO.Interface.ISessionDAO;
+import DAO.SessionDAOImpl;
 import DTO.Computer;
 import Io.Server;
 import Io.Socket;
@@ -19,13 +20,13 @@ import java.util.List;
 
 public class SessionBUS {
     @Setter
-    private ISessionDAO sessionDAO;
+    private ISessionDAO sessionDAO = new SessionDAOImpl();
     @Setter
-    private ComputerUsageBUS computerUsageBUS;
+    private ComputerUsageBUS computerUsageBUS = new ComputerUsageBUS();
     @Setter
-    private AccountBUS accountBUS;
+    private AccountBUS accountBUS = new AccountBUS();
     @Setter
-    private ComputerBUS computerBUS;
+    private ComputerBUS computerBUS = new ComputerBUS();
 
     public boolean checkIfSessionExist(Integer machineId) throws SQLException {
         var session = sessionDAO.findByComputerId(machineId);

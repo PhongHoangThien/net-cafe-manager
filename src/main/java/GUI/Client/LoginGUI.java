@@ -159,6 +159,7 @@ public class LoginGUI extends JFrame {
             this.dispose();
             var mainGUI = new MainGUI();
             mainGUI.setVisible(true);
+            System.out.println("bruh");
         });
         buttonPanel.add(button);
         loginPanel.add(buttonPanel);
