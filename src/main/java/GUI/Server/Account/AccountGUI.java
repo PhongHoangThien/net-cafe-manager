@@ -26,6 +26,19 @@ public class AccountGUI extends JPanel {
 
     public AccountGUI() {
         initComponents();
+        accountBUS = ServiceProvider.getInstance().getService(AccountBUS.class);
+        label1.setFont(Fonts.getFont( Font.BOLD, 36));
+        try {
+            // [5.2] Khởi tạo danh sách tài khoản
+            accounts = accountBUS.getAllAccounts();
+            filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
+            reDesign();
+
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         initEvent();
         // onLoad
         this.addFocusListener(new java.awt.event.FocusAdapter() {
