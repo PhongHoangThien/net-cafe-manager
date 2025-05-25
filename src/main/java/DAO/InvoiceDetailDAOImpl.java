@@ -15,6 +15,7 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
     @Override
     public InvoiceDetail create(InvoiceDetail invoiceDetail) throws SQLException {
 <<<<<<< HEAD
+<<<<<<< HEAD
         // Tạo PreparedStatement để thêm bản ghi mới vào bảng InvoiceDetail
         var preparedStatement = this.prepareStatement(
                 "insert into InvoiceDetail (invoiceId, productId, quantity,price) values (?,?,?,?)",
@@ -41,6 +42,8 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
         // Nếu thất bại, trả về null
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
         return null;
     }
 
@@ -54,6 +57,7 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
     @Override
     public boolean delete(Integer invoiceId) throws SQLException {
 <<<<<<< HEAD
+<<<<<<< HEAD
         String sql = """
                 DELETE From InvoiceDetail where invoiceId = ?
                 """;
@@ -66,6 +70,8 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
         var result = stt.executeUpdate();
         return result != 0;
 =======
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
         return false;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
@@ -73,6 +79,7 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
     // Tìm chi tiết hóa đơn theo ID (id là khóa chính của bảng InvoiceDetail)
     @Override
     public InvoiceDetail findById(Integer integer) throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
         var sql = "select * from InvoiceDetail where id = ?";
 
@@ -89,6 +96,9 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lấy tất cả chi tiết hóa đơn (chưa triển khai)
@@ -100,6 +110,7 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
     // Lấy danh sách chi tiết hóa đơn theo invoiceId (hóa đơn cụ thể)
     @Override
     public List<InvoiceDetail> findAllByInvoiceId(Integer invoiceId) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         String sqlFindByInvoiceId = """
                 select * 
@@ -121,6 +132,9 @@ public class InvoiceDetailDAOImpl extends BaseDAO implements IInvoiceDetailDAO {
             // Ném lỗi dưới dạng RuntimeException nếu truy vấn thất bại
             throw new RuntimeException(e);
         }
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)

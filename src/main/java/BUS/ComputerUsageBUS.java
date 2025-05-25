@@ -42,10 +42,16 @@ public class ComputerUsageBUS {
         return create(computerUsage); // Ghi vào DB
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Lấy toàn bộ lịch sử sử dụng máy và bổ sung thông tin chi tiết cho mỗi bản ghi.
     public List<ComputerUsage> getAll()  {
     try {
         var list = computerUsageDAO.findAll();
+=======
+    public List<ComputerUsage> getAll()  {
+        try {
+            var list = computerUsageDAO.findAll();
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
     public List<ComputerUsage> getAll()  {
         try {
@@ -58,6 +64,7 @@ public class ComputerUsageBUS {
         }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
     //Duyệt qua danh sách các bản ghi, sau đó bổ sung thêm:
     //
@@ -66,6 +73,8 @@ public class ComputerUsageBUS {
     //Thông tin máy tính sử dụng (setComputer)
     //
     //Lý do: Các bản ghi lấy từ DB chỉ chứa ID, không đủ chi tiết để hiển thị trên UI.
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     public List<ComputerUsage> includeDetail(List<ComputerUsage> list){

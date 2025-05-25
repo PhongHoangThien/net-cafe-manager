@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * @author Laffy
  */
@@ -21,6 +22,10 @@ public class FoodOrder extends javax.swing.JFrame {
     /**
      * Creates new form FoodOrder
      */
+=======
+public class FoodOrder extends javax.swing.JFrame {
+
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 public class FoodOrder extends javax.swing.JFrame {
 
@@ -353,7 +358,10 @@ public class FoodOrder extends javax.swing.JFrame {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Variables declaration - do not modify//GEN-BEGIN:variables
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     private javax.swing.JButton jButton1;
@@ -379,7 +387,10 @@ public class FoodOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldName;
 <<<<<<< HEAD
+<<<<<<< HEAD
     // End of variables declaration//GEN-END:variables
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 }

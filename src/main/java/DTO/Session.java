@@ -4,6 +4,9 @@ package DTO;
 =======
 
 
+<<<<<<< HEAD
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +26,9 @@ public class Session implements java.io.Serializable {
     private static final long serialVersionUID = 432430624324L; // Mã phiên bản Serializable
 =======
     private static final long serialVersionUID = 432430624324L;
+<<<<<<< HEAD
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 
     // Constructor copy từ phiên session khác
