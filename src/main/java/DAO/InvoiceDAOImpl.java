@@ -13,6 +13,7 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
     // Cập nhật thông tin hóa đơn
     @Override
     public Invoice update(Invoice invoice) throws SQLException {
+<<<<<<< HEAD
         String sqlUpdateInvoice = """
                 UPDATE invoice 
                 SET computerId = ?,createdBy = ?,createdToAccountId = ?,isPaid = ?,status = ?,total = ?
@@ -45,23 +46,21 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 
         // Nếu cập nhật thành công, trả về hóa đơn mới
         return rowEffect == 1 ? findById(invoice.getId()) : null;
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tìm danh sách hóa đơn theo ID nhân viên và loại hóa đơn
     @Override
     public List<Invoice> findByEmployeeId(int employeeId, Invoice.InvoiceType type) throws SQLException {
-        var sql = "select * from Invoice where createdBy = ? and type = ? and deletedAt is null";
-        try(var preparedStatement = this.prepareStatement(sql)) {
-            preparedStatement.setInt(1, employeeId);
-            preparedStatement.setInt(2, type.ordinal());
-            var resultSet = preparedStatement.executeQuery();
-            return DBHelper.toList(resultSet, Invoice.class);
-        }
+        return null;
     }
 
     // Xóa mềm hóa đơn bằng cách cập nhật trường deletedAt
     @Override
     public boolean delete(Integer integer) throws SQLException {
+<<<<<<< HEAD
         String sqlUpdateInvoiceById = """
                 UPDATE invoice
                 SET deletedAt = getdate()
@@ -72,10 +71,14 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         var rowEffect = stt.executeUpdate();
         stt.close();
         return rowEffect > 0;
+=======
+        return false;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tìm hóa đơn theo ID (không lấy nếu đã bị xóa)
     @Override
+<<<<<<< HEAD
     public Invoice findById(Integer integer) throws SQLException {
         String sqlSelectById = """
                 select *
@@ -89,11 +92,16 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         var invoices = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return invoices.size() > 0 ? invoices.get(0) : null;
+=======
+    public Invoice findById(Integer integer) throws SQLException{
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lấy tất cả hóa đơn chưa bị xóa
     @Override
     public List<Invoice> findAll() throws SQLException {
+<<<<<<< HEAD
         String sqlSelectALlRow = """
                     select * 
                     from Invoice 
@@ -105,11 +113,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         var listInvoice = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return listInvoice;
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lấy tất cả hóa đơn theo loại
     @Override
     public List<Invoice> findAllByType(Invoice.InvoiceType type) throws SQLException {
+<<<<<<< HEAD
         String sqlSelectALlRow = """
                 select *
                 from Invoice
@@ -122,11 +134,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         var listInvoice = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return listInvoice;
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lọc hóa đơn theo các thông tin trong InforFilter
     @Override
     public List<Invoice> findInvoiceByInforFilter(Invoice.InvoiceType type, InforFilter inforFilter) throws SQLException {
+<<<<<<< HEAD
         int quantityQuestionMark = 4;
         String sqlSelectInvoiceByInforFilter = """
                  select *
@@ -190,11 +206,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         var listInvoice = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return listInvoice;
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tạo hóa đơn mới
     @Override
     public Invoice create(Invoice invoice) throws SQLException {
+<<<<<<< HEAD
         System.out.print(invoice.toString());
         try (var stt = this.prepareStatement("""
             insert into Invoice (computerId, createdAt, createdBy, createdToAccountId, deletedAt, isPaid, note, status, total, type) 
@@ -233,6 +253,8 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
                 }
             }
         }
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
         return null;
     }
 }

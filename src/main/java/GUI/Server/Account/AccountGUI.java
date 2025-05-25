@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Sun Mar 12 09:19:53 ICT 2023
- */
-
 package GUI.Server.Account;
 
 import GUI.Server.MainUI;
@@ -22,9 +18,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * @author HuuHoang
- */
 public class AccountGUI extends JPanel {
     private AccountBUS accountBUS;
     private List<Account> accounts;
@@ -69,7 +62,7 @@ public class AccountGUI extends JPanel {
         button1.addActionListener(e -> {
             MainUI.getInstance().setBlur(true);
 
-            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(MainUI.getInstance());
+            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(GUI.Server.MainUI.getInstance());
             accountDetailGUI.setVisible(true);
             MainUI.getInstance().setBlur(false);
             accountDetailGUI.setModal(true);
@@ -83,7 +76,7 @@ public class AccountGUI extends JPanel {
                     reloadTableData();
                 }
             } catch (Exception ex) {
-               //Username existed
+                //Username existed
                 if (ex.getMessage().equals("Username existed")) {
                     JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
                 } else {
@@ -115,7 +108,7 @@ public class AccountGUI extends JPanel {
             int id = (int) table1.getValueAt(row, 0);
             Account account = accounts.stream().filter(account1 -> account1.getId() == id).findFirst().get();
             MainUI.getInstance().setBlur(true);
-            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(MainUI.getInstance(), account);
+            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(GUI.Server.MainUI.getInstance(), account);
             accountDetailGUI.setVisible(true);
             MainUI.getInstance().setBlur(false);
             try {
@@ -270,7 +263,6 @@ public class AccountGUI extends JPanel {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         panel1 = new JPanel();
         label1 = new JLabel();
         button1 = new JButton();
@@ -378,10 +370,7 @@ public class AccountGUI extends JPanel {
             panel3.add(panel2, BorderLayout.CENTER);
         }
         add(panel3, BorderLayout.CENTER);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel panel1;
     private JLabel label1;
     private JButton button1;
@@ -396,7 +385,6 @@ public class AccountGUI extends JPanel {
     private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable table1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
 
 }

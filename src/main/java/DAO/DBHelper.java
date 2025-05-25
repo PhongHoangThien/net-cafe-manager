@@ -26,6 +26,7 @@ public class DBHelper {
         return getInstance().connection;
     }
 
+<<<<<<< HEAD
     // Constructor tạo kết nối
     public DBHelper() throws SQLException {
         try {
@@ -84,5 +85,28 @@ public class DBHelper {
         }
         resultSet.close();
         return list;
+=======
+    private static final String SERVER = "localhost:3306";
+    private static final String DATABASE_NAME = "Internet";
+    private static final String USER_NAME = "root";
+
+    private static final String PASSWORD = "admin";
+
+    private  Connection connection = null;
+
+
+    public DBHelper() throws SQLException  {
+        String url = String
+                .format("jdbc:mysql://%s/%s?useSSL=false&serverTimezone=UTC", SERVER, DATABASE_NAME);
+        connection = DriverManager.getConnection(url, USER_NAME, PASSWORD);
+    }
+    public static String getConnectionString(){
+        return  String
+                .format("jdbc:mysql://%s/%s?useSSL=false&serverTimezone=UTC", SERVER, DATABASE_NAME);
+    }
+
+    public static <T>List<T> toList(ResultSet resultSet, Class<T> clazz) throws SQLException {//Class<T> clazz là truyền vào một class cụ thể, trong đó clazz là một lớp cụ thể
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 }

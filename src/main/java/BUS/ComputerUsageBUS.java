@@ -19,7 +19,7 @@ public class ComputerUsageBUS {
     private ComputerBUS computerBUS;
     // Tạo một bản ghi lịch sử sử dụng máy tính (có thể là của khách hoặc nhân viên).
     public ComputerUsage create(ComputerUsage computerUsage) throws SQLException {
-         return computerUsageDAO.create(computerUsage);
+        return computerUsageDAO.create(computerUsage);
     }
     //
     public ComputerUsage createForEmployee(Date startAt, Date endAt, int accountId) throws SQLException {
@@ -41,15 +41,23 @@ public class ComputerUsageBUS {
 
         return create(computerUsage); // Ghi vào DB
     }
+<<<<<<< HEAD
 //Lấy toàn bộ lịch sử sử dụng máy và bổ sung thông tin chi tiết cho mỗi bản ghi.
     public List<ComputerUsage> getAll()  {
     try {
         var list = computerUsageDAO.findAll();
+=======
+    public List<ComputerUsage> getAll()  {
+        try {
+            var list = computerUsageDAO.findAll();
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 
-        return includeDetail(list);
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+            return includeDetail(list);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+<<<<<<< HEAD
 }
     //Duyệt qua danh sách các bản ghi, sau đó bổ sung thêm:
     //
@@ -58,6 +66,8 @@ public class ComputerUsageBUS {
     //Thông tin máy tính sử dụng (setComputer)
     //
     //Lý do: Các bản ghi lấy từ DB chỉ chứa ID, không đủ chi tiết để hiển thị trên UI.
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     public List<ComputerUsage> includeDetail(List<ComputerUsage> list){
         list.forEach(computerUsage -> {
             if (computerUsage.getUsedByAccountId() != null) {
@@ -94,5 +104,5 @@ public class ComputerUsageBUS {
         return computerUsageDAO.findById(integer);
     }
 
- 
+
 }

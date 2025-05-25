@@ -39,6 +39,7 @@ public class ProductGUI extends JFrame {
 
     // Constructor, thiết lập kích thước và gọi hàm initComponents để khởi tạo giao diện
     public ProductGUI() {
+<<<<<<< HEAD
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Khởi tạo service BUS để gọi nghiệp vụ
         productBUS = ServiceProvider.getInstance().getService(ProductBUS.class);
@@ -182,6 +183,10 @@ public class ProductGUI extends JFrame {
             throw new RuntimeException(e);
         }
     }
+=======
+    }
+
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 
     // Hàm showProduct() sẽ được dùng để hiển thị danh sách sản phẩm lên giao diện (chưa triển khai)
     public void showProduct() {

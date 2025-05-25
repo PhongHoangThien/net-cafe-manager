@@ -1,5 +1,10 @@
 package DTO;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +19,11 @@ import java.util.Date;
 @Builder
 public class Session implements java.io.Serializable {
     @Serial
+<<<<<<< HEAD
     private static final long serialVersionUID = 432430624324L; // Mã phiên bản Serializable
+=======
+    private static final long serialVersionUID = 432430624324L;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 
     // Constructor copy từ phiên session khác
     public Session(Session session){
@@ -31,6 +40,7 @@ public class Session implements java.io.Serializable {
         this.usingComputer = session.usingComputer;
     }
 
+<<<<<<< HEAD
     private Integer id;                 // ID phiên làm việc
     private int totalTime = 0;          // Tổng thời gian sử dụng (giây)
     private int usedTime = 0;           // Thời gian đã sử dụng (giây)
@@ -42,4 +52,28 @@ public class Session implements java.io.Serializable {
     private Account usingByAccount;     // Thông tin tài khoản người dùng
     private Integer computerID = null;  // ID máy tính sử dụng
     private Computer usingComputer;     // Thông tin máy tính đang dùng
+=======
+    private Integer id;
+
+    private int totalTime=0; // seconds
+
+    private int usedTime = 0; // seconds
+
+
+    private double usedCost = 0; // VND
+
+
+    private int serviceCost = 0; // VND
+
+    private Date startTime = new Date();
+
+    private double prepaidAmount = 0; // VND
+    private Integer usingBy = null;
+    private Account usingByAccount;
+
+    private Integer computerID = null;
+    private Computer usingComputer;
+
+
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 }

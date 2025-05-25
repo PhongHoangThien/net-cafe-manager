@@ -45,7 +45,7 @@ public class Socket implements Serializable {
 
     public void on(String eventType, Callback callback) {
         if (!eventHandlers.containsKey(eventType)) {
-            eventHandlers.put(eventType, new LinkedList<Callback>());
+            eventHandlers.put(eventType, new java.util.LinkedList<Callback>());
         }
         eventHandlers.get(eventType).add(callback);
     }
