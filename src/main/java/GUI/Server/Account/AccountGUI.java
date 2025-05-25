@@ -52,46 +52,7 @@ public class AccountGUI extends JPanel {
 
     // 6.5: Hệ thống kiểm tra dữ liệu
     private void initEvent() {
-        searchTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                String keyword = searchTextField.getText();
-                if (keyword.trim().equals("")) filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
-                filteredAccounts = accounts.stream().filter(account -> account.getUsername().contains(keyword) || (account.getId() + "").contains(keyword)).filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
-                renderTableData();
-            }
-        });
-        button1.addActionListener(e -> {
-            MainUI.getInstance().setBlur(true);
 
-            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(MainUI.getInstance());
-            accountDetailGUI.setVisible(true);
-            MainUI.getInstance().setBlur(false);
-            accountDetailGUI.setModal(true);
-
-            try {
-                //6.6.1: Thông báo thành công nếu dữ liệu hợp lệ
-                if (accountDetailGUI.getStatus() == JOptionPane.OK_OPTION) {
-                    //6.7: Hệ thống lưu tài khoản mới vào database và cập nhật danh sách tài khoản.
-                    accountBUS.create(accountDetailGUI.getAccount());
-
-                    JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
-
-                    reloadTableData();
-                }
-
-            //6.6.2: Thông báo không thành công nếu dữ liệu không hợp lệ
-            } catch (Exception ex) {
-               //Username existed
-                if (ex.getMessage().equals("Username existed")) {
-                    JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
-                } else {
-                    throw new RuntimeException(ex);
-                }
-            }
-
-
-        });
 
     }
 
