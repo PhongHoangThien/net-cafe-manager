@@ -1,6 +1,3 @@
-/*
- * Created by JFormDesigner on Sun Mar 12 09:19:53 ICT 2023
- */
 
 package GUI.Server.Account;
 
@@ -22,9 +19,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * @author HuuHoang
- */
 public class AccountGUI extends JPanel {
     private AccountBUS accountBUS;
     private List<Account> accounts;
@@ -55,7 +49,7 @@ public class AccountGUI extends JPanel {
         });
     }
 
-
+    // 6.5: Hệ thống kiểm tra dữ liệu
     private void initEvent() {
         searchTextField.addKeyListener(new KeyAdapter() {
             @Override
@@ -75,13 +69,17 @@ public class AccountGUI extends JPanel {
             accountDetailGUI.setModal(true);
 
             try {
+                //6.6.1: Thông báo thành công nếu dữ liệu hợp lệ
                 if (accountDetailGUI.getStatus() == JOptionPane.OK_OPTION) {
+                    //6.7: Hệ thống lưu tài khoản mới vào database và cập nhật danh sách tài khoản.
                     accountBUS.create(accountDetailGUI.getAccount());
 
                     JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
 
                     reloadTableData();
                 }
+
+            //6.6.2: Thông báo không thành công nếu dữ liệu không hợp lệ
             } catch (Exception ex) {
                //Username existed
                 if (ex.getMessage().equals("Username existed")) {
@@ -270,7 +268,6 @@ public class AccountGUI extends JPanel {
     }
 
     private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         panel1 = new JPanel();
         label1 = new JLabel();
         button1 = new JButton();
@@ -378,10 +375,8 @@ public class AccountGUI extends JPanel {
             panel3.add(panel2, BorderLayout.CENTER);
         }
         add(panel3, BorderLayout.CENTER);
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     private JPanel panel1;
     private JLabel label1;
     private JButton button1;
@@ -396,7 +391,6 @@ public class AccountGUI extends JPanel {
     private JPanel panel2;
     private JScrollPane scrollPane1;
     private JTable table1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 
 
 }
