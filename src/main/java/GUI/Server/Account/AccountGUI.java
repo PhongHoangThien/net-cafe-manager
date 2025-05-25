@@ -236,9 +236,16 @@ public class AccountGUI extends JPanel {
     }
 
     private void reloadTableData() {
-
+        try {
+            accounts = accountBUS.getAllAccounts();
+            filteredAccounts = new ArrayList<>(accounts);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        renderTableData();
     }
 
+    // [5.7] Hiển thị danh sách tài khoản đã lọc
     private void renderTableData() {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         // clear table
