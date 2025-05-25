@@ -320,17 +320,17 @@ public class CreateProductGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser chooser = new JFileChooser();
                 chooser.setFileFilter(new FileFilter() {
-                    @Override
-                    public boolean accept(File f) {
-                        var name = f.getName();
-                        return f.isDirectory() || name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".jpeg");
-                    }
+                                          @Override
+                                          public boolean accept(File f) {
+                                              var name = f.getName();
+                                              return f.isDirectory() || name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".jpeg");
+                                          }
 
-                    @Override
-                    public String getDescription() {
-                        return "Image File (*.jpg, *.png, *.jpeg)";
-                    }
-                }
+                                          @Override
+                                          public String getDescription() {
+                                              return "Image File (*.jpg, *.png, *.jpeg)";
+                                          }
+                                      }
                 );
                 int result = chooser.showOpenDialog(CreateProductGUI.this);
                 try {
@@ -345,7 +345,7 @@ public class CreateProductGUI extends JFrame {
                         System.out.println(newimage.getAbsolutePath());
                         product.setImage("images/" + selectedFile.getName());
                         newPath = product.getImage();
-                       image.setIcon(new ImageIcon(selectedImage.getScaledInstance(200,300,Image.SCALE_SMOOTH)));
+                        image.setIcon(new ImageIcon(selectedImage.getScaledInstance(200,300,Image.SCALE_SMOOTH)));
                     }
                 }catch (Exception ex) {
                     ex.printStackTrace();

@@ -305,7 +305,7 @@ public class CreateInvoiceGUI extends JPanel{
         jDialog.setVisible(true);
         event();
         showGUICreateInvoiceByType(type);
-        jDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        jDialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
 

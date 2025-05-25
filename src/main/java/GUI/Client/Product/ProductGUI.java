@@ -174,7 +174,9 @@ public class ProductGUI extends JFrame {
         }
         parentPanel.add(panel,BorderLayout.PAGE_END);
 
+
     }
+
 
     public void showProduct() {
     }

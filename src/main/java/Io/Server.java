@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class Server extends ServerSocket {
     @Getter
-    private final LinkedList<Socket> clients = new LinkedList<>();
+    private final LinkedList<Io.Socket> clients = new LinkedList<>();
     private final Map<String, LinkedList<Callback>> eventHandlers = new java.util.HashMap<>();
     private final LinkedList<Callback> onConnection = new LinkedList<>();
     private final LinkedList<Callback> onDisconnection = new LinkedList<>();
@@ -88,7 +88,7 @@ public class Server extends ServerSocket {
         Thread thread = new Thread(() -> {
             while (true) {
                 try {
-                    Socket client = new Socket(accept());
+                    Io.Socket client = new Io.Socket(accept());
                     clients.add(client);
 
 
@@ -125,7 +125,7 @@ public class Server extends ServerSocket {
     }
 
     public void emit(String eventType, Serializable arg) {
-        for (Socket client : clients) {
+        for (Io.Socket client : clients) {
             client.emit(eventType, arg);
         }
     }
