@@ -5,6 +5,9 @@ package DTO;
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
@@ -27,6 +30,9 @@ public class Session implements java.io.Serializable {
 =======
     private static final long serialVersionUID = 432430624324L;
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)

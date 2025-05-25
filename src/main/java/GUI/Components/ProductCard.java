@@ -51,11 +51,14 @@ public class ProductCard extends javax.swing.JPanel {
     public static void main(String[] args) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         Helper.initUI();
         var frame = new javax.swing.JFrame();
         frame.add(new ProductCard("/images/Bánh_mì_thịt.jpg", "Bánh mì thịt", 10000));
         frame.pack();
         frame.setVisible(true);
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
@@ -224,6 +227,7 @@ public class ProductCard extends javax.swing.JPanel {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if(quantity<=0){
@@ -236,6 +240,12 @@ public class ProductCard extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+=======
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
     }

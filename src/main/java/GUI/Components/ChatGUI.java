@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*
  * Created by JFormDesigner on Fri Apr 07 13:10:50 ICT 2023
  */
@@ -158,6 +159,8 @@ public class ChatGUI extends JFrame {
 
 }
 =======
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 package GUI.Components;

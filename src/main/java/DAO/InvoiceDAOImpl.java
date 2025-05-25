@@ -15,6 +15,7 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
     public Invoice update(Invoice invoice) throws SQLException {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         String sqlUpdateInvoice = """
                 UPDATE invoice 
                 SET computerId = ?,createdBy = ?,createdToAccountId = ?,isPaid = ?,status = ?,total = ?
@@ -53,6 +54,9 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tìm danh sách hóa đơn theo ID nhân viên và loại hóa đơn
@@ -64,6 +68,7 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
     // Xóa mềm hóa đơn bằng cách cập nhật trường deletedAt
     @Override
     public boolean delete(Integer integer) throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         String sqlUpdateInvoiceById = """
@@ -82,10 +87,14 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 =======
         return false;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return false;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tìm hóa đơn theo ID (không lấy nếu đã bị xóa)
     @Override
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     public Invoice findById(Integer integer) throws SQLException {
@@ -109,11 +118,16 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
     public Invoice findById(Integer integer) throws SQLException{
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+    public Invoice findById(Integer integer) throws SQLException{
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lấy tất cả hóa đơn chưa bị xóa
     @Override
     public List<Invoice> findAll() throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         String sqlSelectALlRow = """
@@ -133,11 +147,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lấy tất cả hóa đơn theo loại
     @Override
     public List<Invoice> findAllByType(Invoice.InvoiceType type) throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         String sqlSelectALlRow = """
@@ -158,11 +176,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Lọc hóa đơn theo các thông tin trong InforFilter
     @Override
     public List<Invoice> findInvoiceByInforFilter(Invoice.InvoiceType type, InforFilter inforFilter) throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         int quantityQuestionMark = 4;
@@ -234,11 +256,15 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 =======
         return null;
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
+=======
+        return null;
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
     }
 
     // Tạo hóa đơn mới
     @Override
     public Invoice create(Invoice invoice) throws SQLException {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         System.out.print(invoice.toString());
@@ -279,6 +305,8 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
                 }
             }
         }
+=======
+>>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
 >>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 =======
