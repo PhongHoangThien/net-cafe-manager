@@ -20,7 +20,7 @@ import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 
 public class AccountGUI extends JPanel {
-    private AccountBUS accountBUS;
+    public AccountBUS accountBUS;
     private List<Account> accounts;
     private List<Account> filteredAccounts;
 
@@ -102,6 +102,8 @@ public class AccountGUI extends JPanel {
         JMenuItem menuItem1 = new JMenuItem();
         JMenuItem menuItem2 = new JMenuItem();
         JMenuItem menuItem3 = new JMenuItem("Đổi mật khẩu");
+
+        //5.1.1 Chọn chức năng nạp tiền
         JMenuItem menuItem4 = new JMenuItem("Nạp tiền");
         menuItem1.addActionListener(e -> {
             int row = table1.getSelectedRow();

@@ -28,9 +28,6 @@ public class ProductGUI extends JFrame {
     private DefaultTableModel dtm;
 
     public ProductGUI() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         productBUS = ServiceProvider.getInstance().getService(ProductBUS.class);
         this.setLayout(new BorderLayout());
@@ -177,19 +174,9 @@ public class ProductGUI extends JFrame {
         }
         parentPanel.add(panel,BorderLayout.PAGE_END);
 
-    }
-=======
-    }
-=======
-    }
-=======
+
     }
 
->>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
-
->>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
-
->>>>>>> parent of 33ae2b4 (Merge pull request #10 from PhongHoangThien/PhongHoangThien)
 
     public void showProduct() {
     }
