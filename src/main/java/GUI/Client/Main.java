@@ -21,6 +21,7 @@ public class Main {
         try {
             // địa chỉ ip
             socket = new Socket("localhost", Constants.SOCKET_PORT);
+            Session session = new Session();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
