@@ -146,9 +146,9 @@ public class LoginGUI extends JFrame {
             });
             Main.socket.emit("login",
                     LoginPayload.builder()
-                    .username(txtUsername.getText())
-                    .password(new String(txtPassword.getPassword()))
-                    .build());
+                            .username(txtUsername.getText())
+                            .password(new String(txtPassword.getPassword()))
+                            .build());
 
         });
         Main.socket.on("openNewSession",(__,data)->{
@@ -159,7 +159,6 @@ public class LoginGUI extends JFrame {
             this.dispose();
             var mainGUI = new MainGUI();
             mainGUI.setVisible(true);
-            System.out.println("bruh");
         });
         buttonPanel.add(button);
         loginPanel.add(buttonPanel);

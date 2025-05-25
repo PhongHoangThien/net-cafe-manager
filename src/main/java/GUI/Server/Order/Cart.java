@@ -91,23 +91,23 @@ public class Cart extends javax.swing.JDialog {
         jPanel11 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
 
-        setPreferredSize(new Dimension(720, 693));
+        setPreferredSize(new java.awt.Dimension(720, 693));
 
-        jLabel1.setFont(new Font("Nunito SemiBold", 1, 26)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Nunito SemiBold", 1, 26)); // NOI18N
         jLabel1.setText("Sản phẩm trong giỏ của bạn:");
-        getContentPane().add(jLabel1, BorderLayout.NORTH);
+        getContentPane().add(jLabel1, java.awt.BorderLayout.NORTH);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 10, 10, 10));
-        jPanel1.setLayout(new BorderLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 20, 0));
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, 5));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
 
-        jButton5.setFont(new Font("Nunito Black", 0, 18)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Nunito Black", 0, 18)); // NOI18N
         jButton5.setText("Xoá lựa chọn");
-        jButton5.setPreferredSize(new Dimension(200, 34));
+        jButton5.setPreferredSize(new java.awt.Dimension(200, 34));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -115,11 +115,11 @@ public class Cart extends javax.swing.JDialog {
         });
         jPanel3.add(jButton5);
 
-        jButton6.setBackground(new Color(66, 153, 225));
-        jButton6.setFont(new Font("Nunito Black", 0, 18)); // NOI18N
-        jButton6.setForeground(new Color(255, 255, 255));
+        jButton6.setBackground(new java.awt.Color(66, 153, 225));
+        jButton6.setFont(new java.awt.Font("Nunito Black", 0, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Xoá tất cả");
-        jButton6.setPreferredSize(new Dimension(200, 34));
+        jButton6.setPreferredSize(new java.awt.Dimension(200, 34));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -129,9 +129,9 @@ public class Cart extends javax.swing.JDialog {
 
         jPanel2.add(jPanel3);
 
-        jPanel1.add(jPanel2, BorderLayout.NORTH);
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-        jTable2.setFont(new Font("Nunito", 0, 16)); // NOI18N
+        jTable2.setFont(new java.awt.Font("Nunito", 0, 16)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                         {null, null, null, null, null, null},
@@ -160,7 +160,7 @@ public class Cart extends javax.swing.JDialog {
                 }
         ) {
             Class[] types = new Class[]{
-                    String.class, String.class, String.class, String.class, String.class, String.class
+                    java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean[]{
                     false, false, false, false, false, false
@@ -178,34 +178,34 @@ public class Cart extends javax.swing.JDialog {
         jTable2.setShowGrid(true);
         jScrollPane3.setViewportView(jTable2);
 
-        jPanel1.add(jScrollPane3, BorderLayout.CENTER);
+        jPanel1.add(jScrollPane3, java.awt.BorderLayout.CENTER);
 
-        jPanel5.setPreferredSize(new Dimension(700, 150));
+        jPanel5.setPreferredSize(new java.awt.Dimension(700, 150));
         jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
 
-        jPanel10.setMinimumSize(new Dimension(0, 0));
-        jPanel10.setPreferredSize(new Dimension(900, 90));
-        jPanel10.setLayout(new FlowLayout(FlowLayout.RIGHT, 60, 2));
+        jPanel10.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel10.setPreferredSize(new java.awt.Dimension(900, 90));
+        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 60, 2));
 
-        jLabel7.setFont(new Font("Nunito ExtraBold", 0, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Nunito ExtraBold", 0, 24)); // NOI18N
         jLabel7.setText("Tổng tiền:");
         jPanel10.add(jLabel7);
 
-        jLabelTongTien.setFont(new Font("Nunito ExtraBold", 0, 24)); // NOI18N
+        jLabelTongTien.setFont(new java.awt.Font("Nunito ExtraBold", 0, 24)); // NOI18N
         jLabelTongTien.setText("200.000đ");
         jPanel10.add(jLabelTongTien);
 
         jPanel5.add(jPanel10);
 
-        jPanel11.setPreferredSize(new Dimension(900, 50));
+        jPanel11.setPreferredSize(new java.awt.Dimension(900, 50));
         jPanel11.setRequestFocusEnabled(false);
 
-        jButton4.setBackground(new Color(66, 153, 225));
-        jButton4.setFont(new Font("Nunito Black", 0, 18)); // NOI18N
-        jButton4.setForeground(new Color(255, 255, 255));
+        jButton4.setBackground(new java.awt.Color(66, 153, 225));
+        jButton4.setFont(new java.awt.Font("Nunito Black", 0, 18)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Order");
         jButton4.setOpaque(true);
-        jButton4.setPreferredSize(new Dimension(150, 50));
+        jButton4.setPreferredSize(new java.awt.Dimension(150, 50));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -215,9 +215,9 @@ public class Cart extends javax.swing.JDialog {
 
         jPanel5.add(jPanel11);
 
-        jPanel1.add(jPanel5, BorderLayout.PAGE_END);
+        jPanel1.add(jPanel5, java.awt.BorderLayout.PAGE_END);
 
-        getContentPane().add(jPanel1, BorderLayout.CENTER);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -298,7 +298,7 @@ public class Cart extends javax.swing.JDialog {
         Helper.initUI();
 
         /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Cart(null).setVisible(true);
             }

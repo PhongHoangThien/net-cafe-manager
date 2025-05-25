@@ -19,12 +19,12 @@ import java.util.List;
 /**
  * @author Laffy
  */
-public class FoodOrder extends JFrame {
+public class FoodOrder extends javax.swing.JFrame {
 
     /**
      * Creates new form FoodOrder
      */
-    private final List<ProductCard> productCards = new ArrayList<>();
+    private final List<ProductCard> productCards = new java.util.ArrayList<>();
     public static List<Product> products;
     public void renderProductCards() {
         jPanelProduct.removeAll();
@@ -119,42 +119,42 @@ public class FoodOrder extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new JLabel();
-        jPanel1 = new JPanel();
-        jPanel2 = new JPanel();
-        jPanel6 = new JPanel();
-        jLabel8 = new JLabel();
-        jComboBoxLoaiSp = new JComboBox();
-        jPanel7 = new JPanel();
-        jLabel4 = new JLabel();
-        jTextFieldName = new JTextField();
-        jPanel8 = new JPanel();
-        jLabel9 = new JLabel();
-        jComboBoxOrderBy = new JComboBox();
-        jPanel9 = new JPanel();
-        jLabel6 = new JLabel();
-        jPanel3 = new JPanel();
-        jPanel4 = new JPanel();
-        jButton2 = new JButton();
-        jButton1 = new JButton();
-        jButton4 = new JButton();
-        jPanel5 = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jPanelProduct = new JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBoxLoaiSp = new javax.swing.JComboBox();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldName = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBoxOrderBy = new javax.swing.JComboBox();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanelProduct = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Nunito SemiBold", 1, 26)); // NOI18N
         jLabel1.setText("Dịch vụ");
         getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 0, 0));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 20, 0));
         jPanel2.setLayout(new java.awt.GridLayout(3, 2, 10, 2));
 
-        jPanel6.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
+        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 100, 0, 0));
         jPanel6.setPreferredSize(new java.awt.Dimension(1000, 45));
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
@@ -182,7 +182,7 @@ public class FoodOrder extends JFrame {
 
         jPanel2.add(jPanel7);
 
-        jPanel8.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
+        jPanel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 100, 0, 0));
         jPanel8.setPreferredSize(new java.awt.Dimension(1000, 45));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -207,20 +207,20 @@ public class FoodOrder extends JFrame {
 
         jPanel3.setPreferredSize(new java.awt.Dimension(1480, 40));
 
-        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 729, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 45, Short.MAX_VALUE)
         );
 
         jPanel2.add(jPanel3);
 
-        jPanel4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 50));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 50));
         jPanel4.setPreferredSize(new java.awt.Dimension(1480, 40));
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 20, 5));
 
@@ -266,8 +266,8 @@ public class FoodOrder extends JFrame {
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 60, 5));
         jPanel1.add(jPanel5, java.awt.BorderLayout.PAGE_END);
 
-        jScrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jPanelProduct.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jScrollPane1.setViewportView(jPanelProduct);
@@ -333,9 +333,9 @@ public class FoodOrder extends JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -345,7 +345,7 @@ public class FoodOrder extends JFrame {
             java.util.logging.Logger.getLogger(FoodOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(FoodOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FoodOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -360,27 +360,27 @@ public class FoodOrder extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton4;
-    private JComboBox<TypeProductCbItem> jComboBoxLoaiSp;
-    private JComboBox<String> jComboBoxOrderBy;
-    private JLabel jLabel1;
-    private JLabel jLabel4;
-    private JLabel jLabel6;
-    private JLabel jLabel8;
-    private JLabel jLabel9;
-    private JPanel jPanel1;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
-    private JPanel jPanel4;
-    private JPanel jPanel5;
-    private JPanel jPanel6;
-    private JPanel jPanel7;
-    private JPanel jPanel8;
-    private JPanel jPanel9;
-    private JPanel jPanelProduct;
-    private JScrollPane jScrollPane1;
-    private JTextField jTextFieldName;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<TypeProductCbItem> jComboBoxLoaiSp;
+    private javax.swing.JComboBox<String> jComboBoxOrderBy;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelProduct;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 }
