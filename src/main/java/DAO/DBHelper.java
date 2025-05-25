@@ -13,7 +13,7 @@ public class DBHelper {
     private static final String SERVER = "localhost:3306";
     private static final String DATABASE_NAME = "internet";
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "admin";
 
     private static DBHelper getInstance() throws SQLException {
         if (instance == null || instance.connection == null || instance.connection.isClosed()) {
