@@ -14,13 +14,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
-    private static final int COMPUTER_ID = 1;
+    private static final int COMPUTER_ID = 4;
     public static final Socket socket;
 
     static {
         try {
             // địa chỉ ip
-            socket = new Socket("localhost", Constants.SOCKET_PORT);
+            socket = new Socket("10.0.182.61", Constants.SOCKET_PORT);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,11 +42,6 @@ public class Main {
         socket.on("listProduct",(c,data)->{
             List<Product> products = (List<Product>) data;
             FoodOrder.products = products;
-        });
-        socket.on("updateSession", (c, data) -> {
-            Main.session = (Session) data;
-            // Hiển thị GUI sau khi đã có session
-            SwingUtilities.invokeLater(MainGUI::new);
         });
         Helper.initUI();
         //shutdown hook

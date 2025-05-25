@@ -1,4 +1,7 @@
+
+
 package DTO;
+
 
 import lombok.*;
 
@@ -14,13 +17,13 @@ import java.util.List;
 @Setter
 public class Product implements java.io.Serializable {
     @Serial
-    private static final long serialVersionUID = 214560262412L; // Mã phiên bản Serializable
+    private static final long serialVersionUID =214560262412L;
 
-    // Enum định nghĩa loại sản phẩm
     public enum ProductType {
-        FOOD,    // Đồ ăn
-        DRINK,   // Đồ uống
-        CARD;    // Thẻ
+        FOOD,
+        DRINK,
+        CARD,
+        ;
 
         @Override
         public String toString() {
@@ -32,18 +35,32 @@ public class Product implements java.io.Serializable {
         }
     }
 
-    private Integer id;                // ID sản phẩm
-    private String name;               // Tên sản phẩm
-    private double price;              // Giá sản phẩm
-    private ProductType type;          // Loại sản phẩm (Food, Drink, Card)
-    private int stock;                 // Số lượng tồn kho
-    private String description;        // Mô tả sản phẩm
-    private String image;              // Link hoặc tên ảnh sản phẩm
-    private Date createdAt = new Date();  // Ngày tạo sản phẩm
-    private Date deletedAt;            // Ngày xóa sản phẩm (nếu có)
-    private List<InvoiceDetail> invoiceDetails; // Danh sách chi tiết hóa đơn liên quan
 
-    // Gán loại sản phẩm theo chỉ số enum
+    private Integer id;
+
+    private String name;
+
+
+    private double price;
+
+
+    private ProductType type;
+
+
+    private int stock;
+
+    private String description;
+
+
+    private String image;
+
+
+    private Date createdAt = new Date();
+
+    private Date deletedAt;
+
+    private List<InvoiceDetail> invoiceDetails;
+
     public void setType(Integer productType) {
         this.type = ProductType.values()[productType];
     }

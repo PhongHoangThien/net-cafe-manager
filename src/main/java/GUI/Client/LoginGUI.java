@@ -146,9 +146,9 @@ public class LoginGUI extends JFrame {
             });
             Main.socket.emit("login",
                     LoginPayload.builder()
-                            .username(txtUsername.getText())
-                            .password(new String(txtPassword.getPassword()))
-                            .build());
+                    .username(txtUsername.getText())
+                    .password(new String(txtPassword.getPassword()))
+                    .build());
 
         });
         Main.socket.on("openNewSession",(__,data)->{

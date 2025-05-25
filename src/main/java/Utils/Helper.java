@@ -30,9 +30,6 @@ public class Helper {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public static String getDateString(Date date) {
-        if (date == null) {
-            return "";
-        }
         return dateFormat.format(date);
     }
 

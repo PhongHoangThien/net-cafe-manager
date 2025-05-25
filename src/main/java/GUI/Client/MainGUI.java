@@ -19,9 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 
-/**
- * @author Laffy
- */
+
 public class MainGUI extends JFrame {
     public java.util.List<Message> messages = new ArrayList<>();
     private final ChatGUI chatGUI;
@@ -127,6 +125,8 @@ public class MainGUI extends JFrame {
             Main.socket.emit("changePassword", newPassword);
 
         });
+        //1.  CUS PRESS ORDER BUTTON ON MAIN UI
+        //2.  btn4.addActionListener()    ->foodOrder.setVisible()
         button4.addActionListener(e->{
             new FoodOrder().setVisible(true);
         });
