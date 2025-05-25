@@ -27,12 +27,9 @@ public class Helper {
         return new File(path).listFiles();
     }
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public static String getDateString(Date date) {
-        if (date == null) {
-            return "N/A";
-        }
         return dateFormat.format(date);
     }
 
@@ -75,7 +72,7 @@ public class Helper {
     public static ImageIcon getIcon(String path, int width, int height) {
         var icon = new ImageIcon(getResource(path));
         Image img = icon.getImage();
-        Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(newimg);
     }
 
@@ -99,7 +96,7 @@ public class Helper {
         Image img = icon.getImage();
         if (width == 0 || height == 0)
             return img;
-        return img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+        return img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 
     public static ImageIcon getIcon(String path) {

@@ -1,33 +1,36 @@
 package DTO;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+//import java.lang.reflect.Field;
+
 import java.io.Serial;
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 
-@Data               // Sinh getter, setter, toString, equals, hashCode
-@NoArgsConstructor  // Constructor không tham số
-@AllArgsConstructor // Constructor tất cả tham số
-@Builder            // Hỗ trợ builder pattern
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+//
 public class Invoice implements Serializable {
     @Serial
-    private static final long serialVersionUID = 264603467L; // Mã phiên bản cho Serializable
+    private static final long serialVersionUID = 264603467L;
 
-    // Constructor tùy chỉnh với nhiều tham số
-    public Invoice(int createdToAccountId, Account createdToAccount, int computerId, Computer createdToComputer,
-                   Double total, Date createdAt, Status status, boolean isPaid, int createdBy,
-                   Employee createdByEmployee, InvoiceType type) {
+    public Invoice(int createdToAccountId, Account createdToAccount, int computerId, Computer createdToComputer, Double total, Date createdAt,Status status,boolean isPaid, int createdBy, Employee createdByEmployee, InvoiceType type) {
         this.createdToAccountId = createdToAccountId;
         this.createdToAccount = createdToAccount;
         this.computerId = computerId;
         this.createdToComputer = createdToComputer;
         this.total = total;
-        this.deletedAt = createdAt;  // Có thể là ngày tạo hoặc xóa (cần xem ý đồ)
+        this.deletedAt = createdAt;
         this.status = status;
         this.isPaid = isPaid;
         this.createdBy = createdBy;
@@ -35,10 +38,10 @@ public class Invoice implements Serializable {
         this.type = type;
     }
 
-    // Kiểu hóa đơn: nhập hàng hoặc xuất bán hàng
     public enum InvoiceType {
-        IMPORT,
-        EXPORT;
+          IMPORT,
+            EXPORT,
+    ;
 
         @Override
         public String toString() {
@@ -48,14 +51,13 @@ public class Invoice implements Serializable {
             };
         }
     }
-
-    // Trạng thái hóa đơn
     public enum Status {
-        WAITING_FOR_ACCEPT,  // Chờ duyệt
-        ACCEPTED,            // Đã duyệt
-        REJECTED,            // Đã từ chối
-        DONE;                // Hoàn thành
+        WAITING_FOR_ACCEPT,
+        ACCEPTED,
+        REJECTED,
+        DONE
 
+        ;
         @Override
         public String toString() {
             return switch (this) {
@@ -67,28 +69,30 @@ public class Invoice implements Serializable {
         }
     }
 
-    private int id;                              // ID hóa đơn
-    private Integer createdToAccountId = null;  // ID tài khoản được tạo hóa đơn
-    private Account createdToAccount;            // Đối tượng Account liên quan
-    private Integer computerId = null;           // ID máy tính liên quan
-    private Computer createdToComputer;          // Đối tượng Computer liên quan
-    private double total = 0.0;                   // Tổng tiền hóa đơn
-    private Date createdAt = new Date();          // Ngày tạo hóa đơn
-    private Status status = Status.WAITING_FOR_ACCEPT;  // Trạng thái hóa đơn (mặc định chờ duyệt)
-    private boolean isPaid = false;                // Đã thanh toán hay chưa
-    private int createdBy;                         // ID người tạo hóa đơn
-    private Employee createdByEmployee;            // Đối tượng nhân viên tạo hóa đơn
-    private InvoiceType type;                       // Loại hóa đơn (nhập/xuất)
-    private Date deletedAt;                         // Ngày xóa (nếu có)
-    private String note;                            // Ghi chú
-    private List<InvoiceDetail> invoiceDetails;    // Chi tiết hóa đơn
+    private int id;
+    private Integer createdToAccountId = null   ;
 
-    // Phương thức trả về trạng thái thanh toán dưới dạng chuỗi
-    public String explainIsPaid() {
-        return this.isPaid ? "Đã thanh toán" : "Chưa thanh toán";
+    private Account createdToAccount;
+    private Integer computerId = null;
+    private Computer createdToComputer;
+
+    private double total = 0.0f;
+    private Date createdAt = new Date();
+   
+    private Status status = Status.WAITING_FOR_ACCEPT;
+    private boolean isPaid = false;
+    private int createdBy;
+    private Employee createdByEmployee;
+
+   
+    private InvoiceType type;
+    private Date deletedAt;
+    private String note;
+    private List<InvoiceDetail> invoiceDetails;
+    public String explainIsPaid(){
+
+        return this.isPaid?"Đã thanh toán":"Chưa thanh toán";
     }
-
-    // Set trạng thái hóa đơn theo số nguyên
     public void setStatus(Integer status) {
         switch (status) {
             case 1 -> this.status = Status.WAITING_FOR_ACCEPT;
@@ -98,16 +102,14 @@ public class Invoice implements Serializable {
         }
     }
 
-    // Set trạng thái thanh toán
     public void setIsPaid(boolean paid) {
         isPaid = paid;
     }
-
-    // Set loại hóa đơn theo số nguyên
     public void setType(Integer type) {
         switch (type) {
             case 1 -> this.type = InvoiceType.IMPORT;
             case 2 -> this.type = InvoiceType.EXPORT;
         }
     }
+
 }

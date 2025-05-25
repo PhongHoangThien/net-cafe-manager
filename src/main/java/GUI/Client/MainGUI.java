@@ -6,7 +6,6 @@ package GUI.Client;
 
 import javax.swing.border.*;
 
-import BUS.SessionBUS;
 import GUI.Components.ChatGUI;
 import GUI.Server.Order.FoodOrder;
 import Utils.Fonts;
@@ -20,13 +19,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.*;
 
-/**
- * @author Laffy
- */
+
 public class MainGUI extends JFrame {
     public java.util.List<Message> messages = new ArrayList<>();
     private final ChatGUI chatGUI;
-    private SessionBUS sessionBUS = new SessionBUS();
 
     public MainGUI() {
         chatGUI = new ChatGUI(messages, Message.FROM.CLIENT);
@@ -63,7 +59,6 @@ public class MainGUI extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         FlatDropShadowBorder shadow = new FlatDropShadowBorder();
         panel2.setBorder(BorderFactory.createEmptyBorder(10, 50, 10, 50));
-        Main.session = sessionBUS.createSession(0, 1);
         label7.setText(Main.session.getUsingByAccount() == null ? "KHÁCH VÃNG LAI" : Main.session.getUsingByAccount().getUsername());
         label7.putClientProperty("FlatLaf.styleClass", "h2");
         label8.setIcon(Helper.getIcon("/icons/supportbanner.png", 300, 180));
@@ -130,6 +125,8 @@ public class MainGUI extends JFrame {
             Main.socket.emit("changePassword", newPassword);
 
         });
+        //1.  CUS PRESS ORDER BUTTON ON MAIN UI
+        //2.  btn4.addActionListener()    ->foodOrder.setVisible()
         button4.addActionListener(e->{
             new FoodOrder().setVisible(true);
         });

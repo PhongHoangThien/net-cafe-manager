@@ -7,75 +7,75 @@ import DTO.Invoice;
 import java.sql.*;
 import java.util.List;
 
-// Lớp triển khai các thao tác CRUD cho hóa đơn (Invoice)
 public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
 
-    // Cập nhật thông tin hóa đơn
+
     @Override
     public Invoice update(Invoice invoice) throws SQLException {
-
         String sqlUpdateInvoice = """
                 UPDATE invoice 
                 SET computerId = ?,createdBy = ?,createdToAccountId = ?,isPaid = ?,status = ?,total = ?
                 WHERE id = ?
                 """;
         var stt = this.prepareStatement(sqlUpdateInvoice);
-
-        // Nếu không có máy tính (phieu nhap), thì set NULL
-        if(invoice.getComputerId() == 0){
+        if(invoice.getComputerId() == 0){//khi tao phieu nhap thi computer set null
             stt.setString(1,null);
-        } else {
+        }
+        else {
             stt.setInt(1, invoice.getComputerId());
         }
 
-        // Nếu không có tài khoản người dùng, set NULL
         if(invoice.getCreatedToAccountId() == 0){
             stt.setString(3,null);
-        } else {
+        }
+        else {
             stt.setInt(3, invoice.getCreatedToAccountId());
         }
-
-        stt.setInt(2, invoice.getCreatedBy());
-        stt.setInt(4, invoice.isPaid() ? 1 : 0); // true → 1, false → 0
-        stt.setInt(5, invoice.getStatus().ordinal()); // enum → số nguyên
-        stt.setDouble(6, invoice.getTotal());
-        stt.setInt(7, invoice.getId());
-
+        stt.setInt(2,invoice.getCreatedBy());
+        System.out.print(invoice.isPaid());
+        stt.setInt(4,invoice.isPaid() ? 1:0);
+        stt.setInt(5,invoice.getStatus().ordinal());
+        stt.setDouble(6,invoice.getTotal());
+        stt.setInt(7,invoice.getId());
         var rowEffect = stt.executeUpdate();
         stt.close();
-
-        // Nếu cập nhật thành công, trả về hóa đơn mới
-        return rowEffect == 1 ? findById(invoice.getId()) : null;
-
+        return rowEffect == 1 ? findById(invoice.getId()):null;
     }
 
-    // Tìm danh sách hóa đơn theo ID nhân viên và loại hóa đơn
+
+
+
+
+
+
     @Override
     public List<Invoice> findByEmployeeId(int employeeId, Invoice.InvoiceType type) throws SQLException {
-        return null;
+        var sql = "select * from Invoice where createdBy = ? and type = ? and deletedAt is null";
+        try(var preparedStatement = this.prepareStatement(sql)) {
+            preparedStatement.setInt(1, employeeId);
+            preparedStatement.setInt(2, type.ordinal());
+            var resultSet = preparedStatement.executeQuery();
+            return DBHelper.toList(resultSet, Invoice.class);
+        }
     }
 
-    // Xóa mềm hóa đơn bằng cách cập nhật trường deletedAt
+
     @Override
     public boolean delete(Integer integer) throws SQLException {
-
         String sqlUpdateInvoiceById = """
                 UPDATE invoice
                 SET deletedAt = getdate()
                 WHERE id = ?;
                 """;
         var stt = this.prepareStatement(sqlUpdateInvoiceById);
-        stt.setInt(1, integer);
+        stt.setInt(1,integer);
         var rowEffect = stt.executeUpdate();
         stt.close();
-        return rowEffect > 0;
-
+        return rowEffect > 0 ? true:false;
     }
 
-    // Tìm hóa đơn theo ID (không lấy nếu đã bị xóa)
     @Override
-
-    public Invoice findById(Integer integer) throws SQLException {
+    public Invoice findById(Integer integer) throws SQLException{
         String sqlSelectById = """
                 select *
                 from invoice
@@ -83,17 +83,13 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
                 ORDER BY id DESC;
                 """;
         var stt = this.prepareStatement(sqlSelectById);
-        stt.setInt(1, integer);
+        stt.setInt(1,integer);
         var rs = stt.executeQuery();
-        var invoices = DBHelper.toList(rs, Invoice.class);
+        var invoices = DBHelper.toList(rs,Invoice.class);
         stt.close();
-        return invoices.size() > 0 ? invoices.get(0) : null;
-
-
-
+        return invoices.size() > 0 ? invoices.get(0): null;
     }
 
-    // Lấy tất cả hóa đơn chưa bị xóa
     @Override
     public List<Invoice> findAll() throws SQLException {
 
@@ -103,37 +99,33 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
                     where deletedAt is null
                     ORDER BY id DESC;
                     """;
-        var stt = this.createStatement();
+        var stt =this.createStatement();
         var rs = stt.executeQuery(sqlSelectALlRow);
         var listInvoice = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return listInvoice;
-
     }
 
-    // Lấy tất cả hóa đơn theo loại
+
+
     @Override
     public List<Invoice> findAllByType(Invoice.InvoiceType type) throws SQLException {
-
         String sqlSelectALlRow = """
                 select *
                 from Invoice
                 where deletedAt is null and type = ?
                 ORDER BY id DESC;
                  """;
-        var stt = this.prepareStatement(sqlSelectALlRow);
-        stt.setInt(1, type.ordinal());
+        var stt =this.prepareStatement(sqlSelectALlRow);
+        stt.setInt(1,type.ordinal());
         var rs = stt.executeQuery();
         var listInvoice = DBHelper.toList(rs, Invoice.class);
         stt.close();
         return listInvoice;
-
     }
 
-    // Lọc hóa đơn theo các thông tin trong InforFilter
     @Override
     public List<Invoice> findInvoiceByInforFilter(Invoice.InvoiceType type, InforFilter inforFilter) throws SQLException {
-
         int quantityQuestionMark = 4;
         String sqlSelectInvoiceByInforFilter = """
                  select *
@@ -141,91 +133,85 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
                  where ((createdAt between ? and ?)
                  and (total between ? and  ?)
                 """;
-
-        // Thêm điều kiện nếu có tài khoản
-        if (inforFilter.getAccountID() != 0 && inforFilter.getAccountID() != -1) {
+        if(inforFilter.getAccountID() != 0 && inforFilter.getAccountID() != -1 ){
             sqlSelectInvoiceByInforFilter += "and (createdToAccountId = ?) ";
         }
 
-        // Nếu là khách vãng lai (accountID == -1)
-        if (inforFilter.getAccountID() == -1) {
+        if(inforFilter.getAccountID() == -1 ){//neu bang -1 thi la khach van lai
             sqlSelectInvoiceByInforFilter += "and  (createdToAccountId is NULL) ";
         }
 
-        // Lọc theo máy
-        if (inforFilter.getComputerID() != 0) {
-            sqlSelectInvoiceByInforFilter += " and (computerId = ?)";
+        if(inforFilter.getComputerID() != 0){
+            sqlSelectInvoiceByInforFilter+= " and (computerId = ?)";
         }
-
-        // Lọc theo nhân viên tạo
-        if (inforFilter.getEmployeeID() != 0) {
+        if(inforFilter.getEmployeeID() != 0){
             sqlSelectInvoiceByInforFilter += "and (createdBy = ?)";
         }
-
-        sqlSelectInvoiceByInforFilter += """
+        sqlSelectInvoiceByInforFilter+= """
                  and deletedAt is NULL
                  and type = ?)
                  ORDER BY id DESC;
                 """;
 
+
         var stt = this.prepareStatement(sqlSelectInvoiceByInforFilter);
-        stt.setString(1, inforFilter.getDateFrom());
-        stt.setString(2, inforFilter.getDateTo());
+        stt.setString(1,inforFilter.getDateFrom());
+        stt.setString(2,inforFilter.getDateTo());
+        if(inforFilter.getTotalFrom().equals(""))
+            stt.setDouble(3,0);
+        else
+            stt.setDouble(3,Double.parseDouble(inforFilter.getTotalFrom()));
 
-        // Xử lý khoảng total
-        stt.setDouble(3, inforFilter.getTotalFrom().equals("") ? 0 : Double.parseDouble(inforFilter.getTotalFrom()));
-        stt.setDouble(4, inforFilter.getTotalTo().equals("") ? Integer.MAX_VALUE : Double.parseDouble(inforFilter.getTotalTo()));
+        if(inforFilter.getTotalTo().equals(""))
+            stt.setDouble(4,Integer.MAX_VALUE);//set totalTo la max
+        else
+            stt.setDouble(4,Double.parseDouble(inforFilter.getTotalTo()));
 
-        if (inforFilter.getAccountID() != 0 && inforFilter.getAccountID() != -1) {
-            quantityQuestionMark++;
-            stt.setInt(quantityQuestionMark, inforFilter.getAccountID());
+        if(inforFilter.getAccountID() != 0  && inforFilter.getAccountID() != -1){
+            quantityQuestionMark+=1;
+            stt.setInt(quantityQuestionMark,inforFilter.getAccountID());
         }
-        if (inforFilter.getComputerID() != 0) {
-            quantityQuestionMark++;
-            stt.setInt(quantityQuestionMark, inforFilter.getComputerID());
-        }
-        if (inforFilter.getEmployeeID() != 0) {
-            quantityQuestionMark++;
-            stt.setInt(quantityQuestionMark, inforFilter.getEmployeeID());
+        if(inforFilter.getComputerID() != 0){
+            quantityQuestionMark+=1;
+            stt.setInt(quantityQuestionMark,inforFilter.getComputerID());
         }
 
-        // Gán loại hóa đơn
-        quantityQuestionMark++;
-        stt.setInt(quantityQuestionMark, type.ordinal());
-
+        if(inforFilter.getEmployeeID() != 0){
+            quantityQuestionMark+=1;
+            stt.setInt(quantityQuestionMark,inforFilter.getEmployeeID());
+        }
+        System.out.println(stt.toString());
+        quantityQuestionMark+=1;
+        stt.setInt(quantityQuestionMark,type.ordinal());
         var rs = stt.executeQuery();
-        var listInvoice = DBHelper.toList(rs, Invoice.class);
+        var listInvoice = DBHelper.toList(rs,Invoice.class);
         stt.close();
         return listInvoice;
     }
 
-    // Tạo hóa đơn mới
+
     @Override
     public Invoice create(Invoice invoice) throws SQLException {
-
         System.out.print(invoice.toString());
-        try (var stt = this.prepareStatement("""
-            insert into Invoice (computerId, createdAt, createdBy, createdToAccountId, deletedAt, isPaid, note, status, total, type) 
-            values (?,?,?,?,?,?,?,?,?,?)
-        """, Statement.RETURN_GENERATED_KEYS)) {
-
-            // Set thông tin máy tính (nullable)
-            if (invoice.getComputerId() == 0) {
-                stt.setString(1, null);
-            } else {
+        try(var stt = this.prepareStatement("insert into Invoice (computerId, createdAt, createdBy, createdToAccountId, deletedAt, isPaid, note, status, total, type) values (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
+            if(invoice.getComputerId() == 0){//khi tao phieu nhap thi computer set null
+                stt.setString(1,null);
+            }
+            else {
                 stt.setInt(1, invoice.getComputerId());
             }
 
-            // Set người được tạo (nullable)
-            if (invoice.getCreatedToAccountId() == null || invoice.getCreatedToAccountId() == 0) {
-                stt.setObject(4, null);
-            } else {
+            if(invoice.getCreatedToAccountId() == null|| invoice.getCreatedToAccountId() == 0){//khi tao phieu nhap thi computer set null
+                stt.setObject(4,null);
+            }
+            else {
                 stt.setInt(4, invoice.getCreatedToAccountId());
             }
 
-            stt.setTimestamp(2, new java.sql.Timestamp(invoice.getCreatedAt().getTime()));
+            System.out.print(new Timestamp(invoice.getCreatedAt().getTime()));
+            stt.setTimestamp(2, new Timestamp(invoice.getCreatedAt().getTime()));
             stt.setInt(3, invoice.getCreatedBy());
-            stt.setNull(5, Types.TIMESTAMP); // deletedAt = null
+            stt.setNull(5, Types.TIMESTAMP);
             stt.setBoolean(6, invoice.isPaid());
             stt.setString(7, invoice.getNote());
             stt.setInt(8, invoice.getStatus().ordinal());
@@ -244,3 +230,4 @@ public class InvoiceDAOImpl extends BaseDAO implements IInvoiceDAO {
         return null;
     }
 }
+

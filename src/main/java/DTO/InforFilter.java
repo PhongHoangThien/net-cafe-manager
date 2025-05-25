@@ -5,17 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data               // Sinh getter, setter, toString, equals, hashCode
-@NoArgsConstructor  // Constructor không tham số
-@AllArgsConstructor // Constructor tất cả tham số
-@Builder            // Hỗ trợ builder pattern
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class InforFilter {
-    private String dateFrom;    // Ngày bắt đầu lọc (định dạng chuỗi)
-    private String dateTo;      // Ngày kết thúc lọc (định dạng chuỗi)
-    private String totalFrom;   // Tổng tiền tối thiểu (chuỗi)
-    private String totalTo;     // Tổng tiền tối đa (chuỗi)
+    private String dateFrom;
+    private String dateTo;
+    private String totalFrom;
+    private String totalTo;
 
-    private int computerID;     // ID máy tính để lọc
-    private int employeeID;     // ID nhân viên để lọc
-    private int accountID;      // ID tài khoản để lọc
+    private int computerID;
+    private int employeeID;
+    private int accountID;
+
+
 }
