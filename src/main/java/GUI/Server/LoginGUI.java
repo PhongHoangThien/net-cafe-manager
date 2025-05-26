@@ -178,7 +178,7 @@ public class LoginGUI extends JFrame {
             JOptionPane.showMessageDialog(null, result, null, JOptionPane.INFORMATION_MESSAGE);
         } else {
             //4.0.7 Hệ thống kiểm tra quyền truy cập của tai khoản
-            if (user.isAdmin() || user.isManager() || user.isEmployee()) {
+            if (user.getRole() == Account.Role.USER) {
                 //4.2.7 Nếu người dùng không có quyền truy cập, hệ thống sẽ hiển thị thông báo lỗi
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này", null, JOptionPane.WARNING_MESSAGE);
                 return;
@@ -194,7 +194,7 @@ public class LoginGUI extends JFrame {
 
             //4.0.11 Hệ thống lưu thông tin người dùng vào biến tạm
             emp.setAccount(user);
-            //4.0.11 Hệ thống đăng nhập người dùng vào hệ thống
+            //4.0.12 Hệ thống đăng nhập người dùng vào hệ thống
             MainUI.login(emp);
             //4.0.14 Hệ thống hiện giao diện chính
             MainUI.getInstance(true).setVisible(true);
