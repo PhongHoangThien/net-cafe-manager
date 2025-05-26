@@ -92,8 +92,7 @@ public class AccountBUS {
         return null;
     }
     public Account findByUsername(String username) throws SQLException {
-      return this.accountDAO.findByUsername(username);
-
+        return new Account();
     }
     public void changePassword(int id, String newPassword)  {
         Account account = null;
