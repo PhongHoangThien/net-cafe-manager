@@ -39,6 +39,10 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
 
     }
 
+
+
+    // 5.1.6 Database tạo bản ghi → Trả kết quả "thành công"
+
     public Account update(Account account) throws SQLException {
         var preparedStatement = this.prepareStatement("UPDATE account  SET " +
                 " username = ?, " +
