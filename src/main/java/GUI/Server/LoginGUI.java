@@ -192,13 +192,13 @@ public class LoginGUI extends JFrame {
                 return;
             }
 
-            //4.0.10 Hệ thống lưu thông tin người dùng vào biến tạm
+            //4.0.11 Hệ thống lưu thông tin người dùng vào biến tạm
             emp.setAccount(user);
             //4.0.11 Hệ thống đăng nhập người dùng vào hệ thống
             MainUI.login(emp);
-            //4.0.9 Hệ thống hiện giao diện chính
+            //4.0.14 Hệ thống hiện giao diện chính
             MainUI.getInstance(true).setVisible(true);
-            //4.0.14 Hệ thống đóng giao diện đăng nhập
+            //4.0.15 Hệ thống đóng giao diện đăng nhập
             dispose();
         }
     }
