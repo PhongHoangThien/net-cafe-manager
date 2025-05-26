@@ -91,8 +91,9 @@ public class AccountBUS {
      
         return null;
     }
+    // 5.6-5.7 Tìm kiếm tài khoản bằng username (hỗ trợ luồng lọc)
     public Account findByUsername(String username) throws SQLException {
-        return new Account();
+        return this.accountDAO.findByUsername(username);
     }
     public void changePassword(int id, String newPassword)  {
         Account account = null;
