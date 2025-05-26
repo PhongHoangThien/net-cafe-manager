@@ -103,7 +103,7 @@ public class AccountGUI extends JPanel {
         JMenuItem menuItem2 = new JMenuItem();
         JMenuItem menuItem3 = new JMenuItem("Đổi mật khẩu");
 
-        //5.1.1 Chọn chức năng nạp tiền
+
         JMenuItem menuItem4 = new JMenuItem("Nạp tiền");
 
         menuItem1.addActionListener(e -> {
@@ -130,6 +130,11 @@ public class AccountGUI extends JPanel {
             }
 
         });
+
+        // Hoang Anh Dung - Usecase "Nap tien"
+
+        //5.1.1 Chọn chức năng nạp tiền
+
         menuItem4.addActionListener(e -> {
             int row = table1.getSelectedRow();
             if (row == -1) {
@@ -139,8 +144,6 @@ public class AccountGUI extends JPanel {
             ;
             int id = (int) table1.getValueAt(row, 0);
             Account account = accounts.stream().filter(account1 -> account1.getId() == id).findFirst().get();
-
-            //5.1.1 UI hiển thị form nhập liệu
             var amountStr = JOptionPane.showInputDialog("Nhập số tiền muốn nạp");
 
             // 5.1.2 Nhập thông tin (ID tài khoản, số tiền)
