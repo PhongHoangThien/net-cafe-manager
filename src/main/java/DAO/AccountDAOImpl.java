@@ -97,6 +97,7 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
         statement.setString(1, username);
         var resultSet = statement.executeQuery();
         var accounts = DBHelper.toList(resultSet, Account.class);
+        //4.0.5 Trả về tài khoản từ câu lệnh truy vấn đến database
         return accounts.size() > 0 ? accounts.get(0) : null;
     }
 }

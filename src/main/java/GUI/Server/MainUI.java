@@ -26,7 +26,10 @@ public class MainUI extends JFrame {
     private ComputerUsageBUS computerUsageBUS;
 
     public static void login(Employee currentUser) {
+        //4.0.12 Hệ thống lưu thông tin nhân viên vào người dùng hiện tại
         MainUI.currentUser = currentUser;
+
+        //4.0.13 Hệ thống lưu thời gian đăng nhập
         loginTime = new Date();
     }
 

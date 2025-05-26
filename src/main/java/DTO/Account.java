@@ -68,4 +68,16 @@ public class Account implements java.io.Serializable {
         };
     }
 
+    public boolean isAdmin() {
+        return this.role == Role.ADMIN;
+    }
+
+    public boolean isManager() {
+        return this.role == Role.MANAGER;
+    }
+
+    public boolean isEmployee() {
+        return this.role == Role.EMPLOYEE;
+    }
+
 }
