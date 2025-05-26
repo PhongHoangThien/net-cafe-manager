@@ -23,6 +23,7 @@ public class AccountDetailGUI extends JDialog {
         EDIT, READ_ONLY, CREATE
     }
 
+    //6.0.6. Hệ thống hiển thị AccountDetailUI
     public AccountDetailGUI(Window owner, Account account, Mode mode) {
         this.account = account;
         this.mode = mode;
@@ -34,15 +35,19 @@ public class AccountDetailGUI extends JDialog {
     }
 
     private boolean getAccountFromInput() {
+        //6.0.9. Hệ thống kiểm tra dữ liệu.
         if (textField2.getText().trim().equals("")) {
+            //6.1.9. Hệ thống thông báo lỗi nếu tên đăng nhập không hợp lệ
             JOptionPane.showMessageDialog(this, "Tên đăng nhập không được để trống");
             return false;
         }
         if (textField3.getText().trim().equals("")) {
+            //6.1.10. Hệ thống thông báo lỗi nếu mật khẩu không hợp lệ
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
             return false;
         }
         if (!Helper.isNumber(textField4.getText().trim())) {
+            //6.1.11. Hệ thống thông báo lỗi nếu số dư không hợp lệ
             JOptionPane.showMessageDialog(this, "Số dư không hợp lệ");
             return false;
         }
@@ -88,7 +93,7 @@ public class AccountDetailGUI extends JDialog {
         roleComboBox.setModel(new DefaultComboBoxModel<>(lowerRole));
         textField1.setEditable(false);
         switch (mode) {
-            //6.4: Nhập thông tin tài khoản cần tạo
+            //6.0.7. Nhân viên nhập thông tin của tài khoản mới
             case CREATE -> {
                 label1.setText("Tạo tài khoản");
                 cancel.setText("Hủy");
