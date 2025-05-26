@@ -74,7 +74,9 @@ public class AccountBUS {
 
     public Account login(String username, String password)  {
         try {
+
             var account = this.accountDAO.findByUsername(username);
+            //4.1.4 AccountDAO không tìm thấy tài khoản trong database
             if (account == null) {
                 return  null;
             }
