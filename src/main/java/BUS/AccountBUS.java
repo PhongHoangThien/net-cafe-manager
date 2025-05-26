@@ -21,11 +21,15 @@ public class AccountBUS {
 
     }
     public Account create(Account account) throws SQLException {
+        //6.2.10 AccountBUS kiểm tra tài khoản đã tồn tại chưa
         var existedAccount = this.findByUsername(account.getUsername());
         if (existedAccount != null) {
+            //6.2.11 AccountBUS ném ngoại lệ nếu tài khoản đã tồn tại
             throw new RuntimeException("Username existed");
         }
-     return   this.accountDAO.create(account);
+
+        //6.0.11. AccountDAO tạo tài khoản mới vào database
+        return this.accountDAO.create(account);
     }
 
     public void update(Account account) throws SQLException {
@@ -52,6 +56,7 @@ public class AccountBUS {
     }
 
     public List<Account> getAllAccounts() throws  SQLException {
+        //SF1.0.2. AccountDAO tìm tất cả tài khoản trong database
         var accounts =this.accountDAO.findAll(MainUI.getCurrentUser().getAccount().getRole());
         var sessions = this.sessionBUS.findAll();
         sessions.forEach(s->{
