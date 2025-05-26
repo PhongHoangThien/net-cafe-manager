@@ -40,6 +40,7 @@ public class EmployeeBUS {
             //4.3.8. Trả về null nếu id không tồn tại
             return null;
         try {
+            //4.0.9. EmployeeDAO tìm kiếm nhân viên theo ID tài khoản
             return employeeDAO.findByAccountID(id);
         } catch (SQLException e) {
             //4.4.8. Trả về null nếu không tìm thấy nhân viên
