@@ -53,8 +53,20 @@ public class AccountBUS {
             this.update(account);
     }
 
+    //5.2 Khởi tạo danh sách tài khoản
     public List<Account> getAllAccounts() throws  SQLException {
-        return new ArrayList<>();
+        var accounts =this.accountDAO.findAll(MainUI.getCurrentUser().getAccount().getRole());
+        var sessions = this.sessionBUS.findAll();
+        sessions.forEach(s->{
+
+            if(s.getUsingBy()!=null){
+                var account = accounts.stream().filter(a->a.getId()==s.getUsingBy()).findFirst().orElse(null);
+                if (account!=null) {
+                    account.setCurrentSession(s);
+                }
+            }
+        });
+        return accounts;
     }
 
     public void resetPassword(int integer, String newPassword) throws SQLException {
