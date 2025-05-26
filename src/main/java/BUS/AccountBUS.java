@@ -36,9 +36,10 @@ public class AccountBUS {
         this.accountDAO.delete(integer);
     }
 
+    // [5.8-5.9] Lấy chi tiết tài khoản để xem (gián tiếp qua GUI)
     public Account findById(int integer) throws SQLException {
-        return new Account();
-        }
+        return this.accountDAO.findById(integer);
+    }
 
 
 
