@@ -37,8 +37,8 @@ public class AccountBUS {
     }
 
     public Account findById(int integer) throws SQLException {
-        return this.accountDAO.findById(integer);
-    }
+        return new Account();
+        }
 
 
 
