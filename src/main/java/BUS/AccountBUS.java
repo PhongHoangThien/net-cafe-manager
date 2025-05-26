@@ -8,6 +8,7 @@ import lombok.Setter;
 import DTO.Account;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountBUS {
@@ -53,18 +54,7 @@ public class AccountBUS {
     }
 
     public List<Account> getAllAccounts() throws  SQLException {
-        var accounts =this.accountDAO.findAll(MainUI.getCurrentUser().getAccount().getRole());
-        var sessions = this.sessionBUS.findAll();
-        sessions.forEach(s->{
-
-            if(s.getUsingBy()!=null){
-                var account = accounts.stream().filter(a->a.getId()==s.getUsingBy()).findFirst().orElse(null);
-                if (account!=null) {
-                    account.setCurrentSession(s);
-                }
-            }
-        });
-        return accounts;
+        return new ArrayList<>();
     }
 
     public void resetPassword(int integer, String newPassword) throws SQLException {
