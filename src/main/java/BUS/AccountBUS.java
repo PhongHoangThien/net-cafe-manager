@@ -104,9 +104,14 @@ public class AccountBUS {
 
     }
 
+
     public void deposit(int id, int amount) throws SQLException {
         var account = this.findById(id);
+
+        // 5.1.5 Nếu dữ liệu hợp lệ → Controller Ghi giao dịch nạp tiền vào CSDL
         account.setBalance(account.getBalance() + amount);
+
+        // 5.1.7 Controller gửi phản hồi thành công cho UI
         this.update(account);
     }
 
