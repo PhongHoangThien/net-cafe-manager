@@ -17,7 +17,7 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
 
 
     public Account create(Account account) throws SQLException {
-        //6.0.10. AccountDAO tạo tài khoản mới vào database
+        //6.0.11. AccountDAO tạo tài khoản mới vào database
         var preparedStatement = DBHelper
                 .getConnection()
                 .prepareStatement("INSERT INTO account (username, password, balance, role, createdAt, deletedAt) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
