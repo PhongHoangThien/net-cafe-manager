@@ -15,6 +15,7 @@ public class EmployeeDAOImpl extends BaseDAO implements IEmployeeDAO{
         var resultSet = preparedStatement.executeQuery();
         var employees = DBHelper.toList(resultSet, Employee.class);
         preparedStatement.close();
+        //4.0.9. Trả về Nhân viên từ truy vấn tìm kiếm nhân viên qua EmployeeDAO
         return employees.size() > 0 ? employees.get(0) : null;
 
     }

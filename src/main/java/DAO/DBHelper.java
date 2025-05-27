@@ -9,7 +9,7 @@ public class DBHelper {
     private static DBHelper instance;
     private Connection connection = null;
 
-    // Thông tin kết nối đến MySQL (XAMPP)
+    // Thông tin kết nối đến MySQL
     private static final String SERVER = "localhost:3306";
     private static final String DATABASE_NAME = "internet";
     private static final String USER_NAME = "root";

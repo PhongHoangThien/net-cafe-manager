@@ -29,6 +29,7 @@ public class AccountGUI extends JPanel {
         accountBUS = ServiceProvider.getInstance().getService(AccountBUS.class);
         label1.setFont(Fonts.getFont( Font.BOLD, 36));
         try {
+            // [5.2] Khởi tạo danh sách tài khoản
             accounts = accountBUS.getAllAccounts();
             filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
             reDesign();
@@ -56,6 +57,7 @@ public class AccountGUI extends JPanel {
             public void keyReleased(KeyEvent e) {
                 String keyword = searchTextField.getText();
                 if (keyword.trim().equals("")) filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
+                // [5.6-5.7] Lọc và cập nhật danh sách tài khoản khi nhập từ khóa
                 filteredAccounts = accounts.stream().filter(account -> account.getUsername().contains(keyword) || (account.getId() + "").contains(keyword)).filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
                 renderTableData();
             }
@@ -63,25 +65,23 @@ public class AccountGUI extends JPanel {
         button1.addActionListener(e -> {
             MainUI.getInstance().setBlur(true);
 
-            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(MainUI.getInstance());
+            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(GUI.Server.MainUI.getInstance());
             accountDetailGUI.setVisible(true);
             MainUI.getInstance().setBlur(false);
             accountDetailGUI.setModal(true);
 
             try {
-                //6.6.1: Thông báo thành công nếu dữ liệu hợp lệ
                 if (accountDetailGUI.getStatus() == JOptionPane.OK_OPTION) {
-                    //6.7: Hệ thống lưu tài khoản mới vào database và cập nhật danh sách tài khoản.
+                    //6.0.10: Hệ thống lưu tài khoản mới vào database thông qua AccountBUS
                     accountBUS.create(accountDetailGUI.getAccount());
-
+                    //6.0.12. Hiển thị thông báo tạo tài khoản thành công
                     JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
 
+                    //6.0.13. SF1: Hệ thống reload bảng danh sách tài khoản
                     reloadTableData();
                 }
-
-            //6.6.2: Thông báo không thành công nếu dữ liệu không hợp lệ
             } catch (Exception ex) {
-               //Username existed
+                //Username existed
                 if (ex.getMessage().equals("Username existed")) {
                     JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
                 } else {
@@ -91,6 +91,7 @@ public class AccountGUI extends JPanel {
 
 
         });
+
 
     }
 
@@ -250,21 +251,27 @@ public class AccountGUI extends JPanel {
 
     private void reloadTableData() {
         try {
+            //SF1.0.1 Hệ thống lấy tất cả tài khoản thông qua AccountBUS
             accounts = accountBUS.getAllAccounts();
+            //SF1.0.4. Hệ thống định dạng lại thông tin của các tài khoản
             filteredAccounts = new ArrayList<>(accounts);
         } catch (SQLException ex) {
+            //SF1.1.1. Hệ thống ném ngoại lệ nếu có lỗi xảy ra trong quá trình lấy dữ liệu
             throw new RuntimeException(ex);
         }
         renderTableData();
     }
 
+    // [5.7] Hiển thị danh sách tài khoản đã lọc
     private void renderTableData() {
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        // clear table
-        model.setRowCount(0);
-        filteredAccounts.stream().map(account -> new Object[]{account.getId(), account.getUsername(),Helper.formatMoney( account.getBalance()), account.getRole(), Helper.getDateString(account.getCreatedAt())}).forEach(model::addRow);
+        //SF1.0.5. Hệ thống reload bảng danh sách tài khoản
+        DefaultTableModel model = clearTable();
+
+        //SF1.0.6. Hệ thống render danh sách tài khoản lên bảng
+        renderTable(model);
     }
 
+    //6.0.3 Hệ thống hiển thị panel quản lí tài khoản
     @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
@@ -272,13 +279,24 @@ public class AccountGUI extends JPanel {
             try {
                 accounts = accountBUS.getAllAccounts();
                 filteredAccounts = new ArrayList<>(accounts);
+                //6.0.4. SF1: Hệ thống reload bảng danh sách tài khoản
                 reloadTableData();
-
 
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public DefaultTableModel clearTable(){
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        model.setRowCount(0);
+        return model;
+    }
+
+    public void renderTable(DefaultTableModel model) {
+        filteredAccounts.stream().map(account -> new Object[]{account.getId(), account.getUsername(),
+                Helper.formatMoney( account.getBalance()), account.getRole(), Helper.getDateString(account.getCreatedAt())}).forEach(model::addRow);
     }
 
     private void initComponents() {
@@ -307,11 +325,11 @@ public class AccountGUI extends JPanel {
             panel1.setLayout(new BorderLayout());
 
             //---- label1 ----
-            label1.setText("Qu\u1ea3n l\u00fd t\u00e0i kho\u1ea3n");
+            label1.setText("Quản lý tài khoản");
             panel1.add(label1, BorderLayout.WEST);
 
             //---- button1 ----
-            button1.setText("T\u1ea1o m\u1edbi");
+            button1.setText("Tạo mới");
             button1.setMinimumSize(new Dimension(100, 30));
             button1.setPreferredSize(new Dimension(200, 50));
             button1.setBackground(new Color(0x0bc5ea));
@@ -351,7 +369,7 @@ public class AccountGUI extends JPanel {
                 panel4.add(panel9, BorderLayout.EAST);
 
                 //---- label4 ----
-                label4.setText("Danh s\u00e1ch t\u00e0i kho\u1ea3n:");
+                label4.setText("Danh sách tài khoản:");
                 label4.setBackground(Color.white);
                 panel4.add(label4, BorderLayout.NORTH);
 

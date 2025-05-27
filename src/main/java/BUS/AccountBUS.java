@@ -8,6 +8,7 @@ import lombok.Setter;
 import DTO.Account;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccountBUS {
@@ -21,11 +22,15 @@ public class AccountBUS {
 
     }
     public Account create(Account account) throws SQLException {
+        //6.2.10 AccountBUS kiểm tra tài khoản đã tồn tại chưa
         var existedAccount = this.findByUsername(account.getUsername());
         if (existedAccount != null) {
+            //6.2.11 AccountBUS ném ngoại lệ nếu tài khoản đã tồn tại
             throw new RuntimeException("Username existed");
         }
-     return   this.accountDAO.create(account);
+
+        //6.0.11. AccountDAO tạo tài khoản mới vào database
+        return this.accountDAO.create(account);
     }
 
     public void update(Account account) throws SQLException {
@@ -36,6 +41,7 @@ public class AccountBUS {
         this.accountDAO.delete(integer);
     }
 
+    // [5.8-5.9] Lấy chi tiết tài khoản để xem (gián tiếp qua GUI)
     public Account findById(int integer) throws SQLException {
         return this.accountDAO.findById(integer);
     }
@@ -51,7 +57,9 @@ public class AccountBUS {
             this.update(account);
     }
 
+    //5.2 Khởi tạo danh sách tài khoản
     public List<Account> getAllAccounts() throws  SQLException {
+        //SF1.0.2. AccountDAO tìm tất cả tài khoản trong database
         var accounts =this.accountDAO.findAll(MainUI.getCurrentUser().getAccount().getRole());
         var sessions = this.sessionBUS.findAll();
         sessions.forEach(s->{
@@ -74,7 +82,9 @@ public class AccountBUS {
 
     public Account login(String username, String password)  {
         try {
+
             var account = this.accountDAO.findByUsername(username);
+            //4.1.4 AccountDAO không tìm thấy tài khoản trong database
             if (account == null) {
                 return  null;
             }
@@ -88,9 +98,9 @@ public class AccountBUS {
      
         return null;
     }
+    // 5.6-5.7 Tìm kiếm tài khoản bằng username (hỗ trợ luồng lọc)
     public Account findByUsername(String username) throws SQLException {
-      return this.accountDAO.findByUsername(username);
-
+        return this.accountDAO.findByUsername(username);
     }
     public void changePassword(int id, String newPassword)  {
         Account account = null;
