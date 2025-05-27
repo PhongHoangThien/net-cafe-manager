@@ -15,7 +15,9 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
         return new AccountDAOImpl();
     }
 
+
     public Account create(Account account) throws SQLException {
+        //6.0.10. AccountDAO tạo tài khoản mới vào database
         var preparedStatement = DBHelper
                 .getConnection()
                 .prepareStatement("INSERT INTO account (username, password, balance, role, createdAt, deletedAt) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -36,6 +38,10 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
         return null;
 
     }
+
+    // Hoang Anh Dung - Usecase "Nap tien"
+
+    // 5.1.6 Database tạo bản ghi → Trả kết quả "thành công"
 
     public Account update(Account account) throws SQLException {
         var preparedStatement = this.prepareStatement("UPDATE account  SET " +
@@ -81,6 +87,7 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
         var resultSet = statement.executeQuery("SELECT * FROM account a WHERE a.deletedAt is null");
         var accounts = DBHelper.toList(resultSet, Account.class);
         statement.close();
+        //SF1.0.3. AccountDAO trả về danh sách tài khoản sau khi thực hiện truy vấn
         return accounts;
     }
     public List<Account> findAll(Account.Role beforeRole) throws SQLException {
@@ -97,6 +104,7 @@ public class AccountDAOImpl extends BaseDAO implements IAccountDAO {
         statement.setString(1, username);
         var resultSet = statement.executeQuery();
         var accounts = DBHelper.toList(resultSet, Account.class);
+        //4.0.5 Trả về tài khoản từ câu lệnh truy vấn đến database
         return accounts.size() > 0 ? accounts.get(0) : null;
     }
 }

@@ -163,25 +163,42 @@ public class LoginGUI extends JFrame {
     }
 
 
-    private void btnLoginActionPerformed(ActionEvent e) {        var username = txtUsername.getText();
+    private void btnLoginActionPerformed(ActionEvent e) {
+        //4.0.2 Hệ thống nhận thông tin đăng nhập và lưu vào biến tạm
+        var username = txtUsername.getText();
         var password = txtPassword.getText();
+
+        //4.0.3 Kiểm tra thông tin đăng nhập qua AccountBus
         var user = accountBUS.login(username, password);
+        //4.0.6. Lưu thông tin tài khoản vào biến tạm
+
         if (user == null) {
+            //4.1.3 Nếu thông tin đăng nhập không đúng, hệ thống sẽ hiển thị thông báo lỗi
             var result = "Tài Khoản đăng nhập hoặc Mật Khẩu của bạn không đúng, vui lòng nhập lại";
             JOptionPane.showMessageDialog(null, result, null, JOptionPane.INFORMATION_MESSAGE);
         } else {
+            //4.0.7 Hệ thống kiểm tra quyền truy cập của tai khoản
             if (user.getRole() == Account.Role.USER) {
+                //4.2.7 Nếu người dùng không có quyền truy cập, hệ thống sẽ hiển thị thông báo lỗi
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            //4.0.8 EmployeeBUS tìm kiếm thông tin nhân viên theo ID tài khoản
             var emp = ServiceProvider.getInstance().getService(EmployeeBUS.class).findEmployeeByAccountID(user.getId());
             if (emp == null) {
+                //4.5.8 Nếu nhân viên không tồn tại, hệ thống sẽ hiển thị thông báo lỗi
                 JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào chức năng này", null, JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            //4.0.11 Hệ thống lưu thông tin người dùng vào biến tạm
             emp.setAccount(user);
+            //4.0.12 Hệ thống đăng nhập người dùng vào hệ thống
             MainUI.login(emp);
+            //4.0.14 Hệ thống hiện giao diện chính
             MainUI.getInstance(true).setVisible(true);
+            //4.0.15 Hệ thống đóng giao diện đăng nhập
             dispose();
         }
     }

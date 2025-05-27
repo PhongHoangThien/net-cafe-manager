@@ -22,11 +22,15 @@ public class AccountBUS {
 
     }
     public Account create(Account account) throws SQLException {
+        //6.2.10 AccountBUS kiểm tra tài khoản đã tồn tại chưa
         var existedAccount = this.findByUsername(account.getUsername());
         if (existedAccount != null) {
+            //6.2.11 AccountBUS ném ngoại lệ nếu tài khoản đã tồn tại
             throw new RuntimeException("Username existed");
         }
-     return   this.accountDAO.create(account);
+
+        //6.0.11. AccountDAO tạo tài khoản mới vào database
+        return this.accountDAO.create(account);
     }
 
     public void update(Account account) throws SQLException {
@@ -55,6 +59,7 @@ public class AccountBUS {
 
     //5.2 Khởi tạo danh sách tài khoản
     public List<Account> getAllAccounts() throws  SQLException {
+        //SF1.0.2. AccountDAO tìm tất cả tài khoản trong database
         var accounts =this.accountDAO.findAll(MainUI.getCurrentUser().getAccount().getRole());
         var sessions = this.sessionBUS.findAll();
         sessions.forEach(s->{
@@ -77,7 +82,9 @@ public class AccountBUS {
 
     public Account login(String username, String password)  {
         try {
+
             var account = this.accountDAO.findByUsername(username);
+            //4.1.4 AccountDAO không tìm thấy tài khoản trong database
             if (account == null) {
                 return  null;
             }
@@ -107,9 +114,15 @@ public class AccountBUS {
 
     }
 
+    // Hoang Anh Dung - Usecase "Nap tien"
+
     public void deposit(int id, int amount) throws SQLException {
         var account = this.findById(id);
+
+        // 5.1.5 Nếu dữ liệu hợp lệ → Controller Ghi giao dịch nạp tiền vào CSDL
         account.setBalance(account.getBalance() + amount);
+
+        // 5.1.7 Controller gửi phản hồi thành công cho UI
         this.update(account);
     }
 
