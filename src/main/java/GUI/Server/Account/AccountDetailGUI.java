@@ -77,6 +77,7 @@ public class AccountDetailGUI extends JDialog {
 
     }
 
+    // [5.9] Hiển thị chi tiết tài khoản khi chọn từ bảng
     public AccountDetailGUI(Window owner) {
         this(owner, Account.builder().username("").password("").build(), Mode.CREATE);
     }

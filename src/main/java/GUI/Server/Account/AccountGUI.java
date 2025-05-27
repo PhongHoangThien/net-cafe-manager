@@ -29,6 +29,7 @@ public class AccountGUI extends JPanel {
         accountBUS = ServiceProvider.getInstance().getService(AccountBUS.class);
         label1.setFont(Fonts.getFont( Font.BOLD, 36));
         try {
+            // [5.2] Khởi tạo danh sách tài khoản
             accounts = accountBUS.getAllAccounts();
             filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
             reDesign();
@@ -56,6 +57,7 @@ public class AccountGUI extends JPanel {
             public void keyReleased(KeyEvent e) {
                 String keyword = searchTextField.getText();
                 if (keyword.trim().equals("")) filteredAccounts = accounts.stream().filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
+                // [5.6-5.7] Lọc và cập nhật danh sách tài khoản khi nhập từ khóa
                 filteredAccounts = accounts.stream().filter(account -> account.getUsername().contains(keyword) || (account.getId() + "").contains(keyword)).filter(a->a.getRole().isLessThan(MainUI.getCurrentUser().getAccount().getRole())).toList();
                 renderTableData();
             }
@@ -63,7 +65,7 @@ public class AccountGUI extends JPanel {
         button1.addActionListener(e -> {
             MainUI.getInstance().setBlur(true);
 
-            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(MainUI.getInstance());
+            AccountDetailGUI accountDetailGUI = new AccountDetailGUI(GUI.Server.MainUI.getInstance());
             accountDetailGUI.setVisible(true);
             MainUI.getInstance().setBlur(false);
             accountDetailGUI.setModal(true);
@@ -72,17 +74,14 @@ public class AccountGUI extends JPanel {
                 if (accountDetailGUI.getStatus() == JOptionPane.OK_OPTION) {
                     //6.0.10: Hệ thống lưu tài khoản mới vào database thông qua AccountBUS
                     accountBUS.create(accountDetailGUI.getAccount());
-
                     //6.0.12. Hiển thị thông báo tạo tài khoản thành công
                     JOptionPane.showMessageDialog(this, "Tạo tài khoản thành công");
 
                     //6.0.13. SF1: Hệ thống reload bảng danh sách tài khoản
                     reloadTableData();
                 }
-
-            //6.6.2: Thông báo không thành công nếu dữ liệu không hợp lệ
             } catch (Exception ex) {
-               //Username existed
+                //Username existed
                 if (ex.getMessage().equals("Username existed")) {
                     JOptionPane.showMessageDialog(this, "Tên tài khoản đã tồn tại");
                 } else {
@@ -92,6 +91,7 @@ public class AccountGUI extends JPanel {
 
 
         });
+
 
     }
 
@@ -264,6 +264,7 @@ public class AccountGUI extends JPanel {
         renderTableData();
     }
 
+    // [5.7] Hiển thị danh sách tài khoản đã lọc
     private void renderTableData() {
         //SF1.0.5. Hệ thống reload bảng danh sách tài khoản
         DefaultTableModel model = clearTable();
