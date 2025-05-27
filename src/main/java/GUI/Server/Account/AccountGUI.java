@@ -145,29 +145,27 @@ public class AccountGUI extends JPanel {
             ;
             int id = (int) table1.getValueAt(row, 0);
             Account account = accounts.stream().filter(account1 -> account1.getId() == id).findFirst().get();
-            var amountStr = JOptionPane.showInputDialog("Nhập số tiền muốn nạp");
-
+            String amountStr = JOptionPane.showInputDialog("Nhập số tiền muốn nạp");
             // 5.1.2 Nhập thông tin (ID tài khoản, số tiền)
             if (amountStr == null) return;
 
-            int amount = Integer.parseInt(amountStr);
-            try {
-
-                // 5.1.3 UI gửi dữ liệu nhập cho Controller (Gọi deposit(Id, amount))
-                accountBUS.deposit(account.getId(), amount);
-                reloadTableData();
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-
-            //5.1.4Controller gọi Validator để kiểm tra tính hợp lệ dữ liệu
+            // 5.1.4 Controller gọi Validator để kiểm tra tính hợp lệ dữ liệu
             if (!Helper.isNumber(amountStr)) {
                 JOptionPane.showMessageDialog(this, "Số tiền không hợp lệ");
                 return;
             }
 
-            // 5.1.8 UI hiển thị thông báo "Nạp tiền thành công" cho nhân viên
-            JOptionPane.showMessageDialog(this, "Nạp thành công " + amount + "đ vào tài khoản " + account.getUsername());
+            int amount = Integer.parseInt(amountStr);
+            try {
+                // 5.1.3 UI gửi dữ liệu nhập cho Controller (Gọi deposit(Id, amount))
+                accountBUS.deposit(account.getId(), amount);
+                reloadTableData();
+
+                // 5.1.8 UI hiển thị thông báo "Nạp tiền thành công" cho nhân viên
+                JOptionPane.showMessageDialog(this, "Nạp thành công " + amount + "đ vào tài khoản " + account.getUsername());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
 
         });
         menuItem1.setText("Sửa");
